@@ -1,0 +1,13 @@
+<script type="text/html" id="header-tpl">
+	<a class="logo" title="Go to The Stash Home page"></a>
+	
+	<div class="right_header">
+		{{#user}}
+			Welcome {{user.name}} <button>Logout</button>
+		{{/user}}
+		{{^user}}
+			<a href="getstarted" title="Signup for an account with The Stash">Get Started</a>
+			<button class="login" rel-title="Login">Login</button>
+		{{/user}}
+	</div>
+</script>
