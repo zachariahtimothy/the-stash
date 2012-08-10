@@ -6,12 +6,15 @@
 			}
 		}),
 		Stash: Backbone.Model.extend({
-
+			url: stash.settings.apiUrl + 'stash'
+		}),
+		Error: Backbone.Model.extend({
+			
 		})
 	});
 
 	_.extend(Backbone.Model.prototype, {
-		fetch: function(options){
+		sfetch: function(options){
 			var model = this;
 			options = options || {};
 			var defer = new $.Deferred();

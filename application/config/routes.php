@@ -39,10 +39,15 @@
 */
 
 $route['default_controller'] = "index";
-$route['404_override'] = '';
-// Catchall route accept for static resources
-$route['(^[^\.]*$)'] = "index";
+$route['404_override'] = 'index';
+// $route['api/user/(:any)'] = "user/$1";
+// $route['api/user/:any'] = "user";
+// $route['api/user/*'] = "user";
+// $route['/api/user/(:any)'] = "user";
 
+// Catchall route accept for static resources
+//$route['(^[^\.]*$)'] = "index";
+//$route['(:any)'] = "index";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

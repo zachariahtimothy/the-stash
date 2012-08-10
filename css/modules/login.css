@@ -1,0 +1,9 @@
+#login{
+	text-align:center;
+}
+#login .or{
+	margin:20px 0;
+}
+.fancybox-inner #login{
+	padding-top:40px;
+}

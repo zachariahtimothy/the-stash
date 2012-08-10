@@ -1,0 +1,12 @@
+<script type="text/html" id="error-tpl">
+	<div id="error">
+		<h2 class="headerbar">An Error Has Occured</h2>
+		{{#message}}
+			<p>{{{message}}}</p>
+		{{/message}}
+		{{^message}}
+			<p>Oops! Looks like something is broken.  Our engineers have been alerted and are working feverishly to fix it.</p>
+		{{/message}}
+		<p><a href="/contactus" title="Contact The Stash form">Contact us</a> if you have any questions.</p>
+	</error>
+</script>

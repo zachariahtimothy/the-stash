@@ -1,12 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Index extends CI_Controller {
-	private $_user;
+class Test extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
 		//setup user for use in class
-    	$this->_user = $this->session->userdata('theStashUser');
+    	//$this->_user = $this->session->userdata('theStashUser');
     }
 	/**
 	 * Index Page for this controller.
@@ -23,15 +22,9 @@ class Index extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-		if ($this->_user){
-			$data['user'] = json_encode($this->_user);
-		} else {
-			//$data['user'] = '{"name" : "Zach Curtis", "id":"1", "type":"user"}';
-			$data['user'] = '{}';
-		}
-		$this->load->view('default', $data);
+
+	public function zLogin(){
+		print_r($_POST);
 	}
 }
 

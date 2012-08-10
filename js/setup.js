@@ -57,7 +57,7 @@
 	$('a[href^="/"]').live('click',function(ev){
 		ev.preventDefault();
 		var link = $(ev.currentTarget).attr('href');
-		stash.helpers.navigate('TheStash/index.php' + link);
+		stash.helpers.navigate(link);
 	});
 
 })();

@@ -1,16 +1,23 @@
 #footer{
 	text-align: center;
-	margin:20px 0 10px 0;
+	margin:70px 0 10px 0;
+	padding-top:40px;
+	border-top:1px solid #bdbdbd;
 }
 #footer ul li{
 	display:inline-block;
 }
 #footer ul li:after{
 	content: '|';
+	color:#bdbdbd;
 	display:inline-block;
 	padding-left:6px;
 	padding-right:2px;
 }
 #footer ul li.last:after{
 	content:'';
+}
+#footer .copyright{
+	margin-top:10px;
+	color:#bdbdbd;
 }

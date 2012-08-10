@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     font-family: Helvetica Neue, helvetica, arial;
     font-size:14px;
-    color:#313131;
+    color:#555555;
 }
 
 body{
@@ -16,6 +16,22 @@ ul, h1, h2, h3, h4, p{
 	margin:0;
 	padding:0;
 }
+h1{
+	font-size:26px;
+}
+h2{
+	font-size:24px;
+}
+h3{
+	font-size:22px;
+}
+h4{
+	color:#252525;
+	font-size:20px;
+}
+p{
+	line-height:17px;
+}
 
 a[href]{
 	color:#167f39;
@@ -25,7 +41,9 @@ a[href]:hover{
 	text-decoration: underline;
 }
 
-#content{}
+#content p.description{
+	margin:10px;
+}
 
 .logo{
 	background:url(../images/logo.png) no-repeat;
@@ -52,7 +70,9 @@ button, a[href].button{
 	background-image: -ms-linear-gradient(bottom, rgb(4,76,41) 0%, rgb(22,127,57) 48%, rgb(52,145,64) 52%, rgb(69,191,85) 100%);
 	box-shadow:1px 1px 2px rgba(4,76,41,.8);
 }	
-
+button:hover{
+	cursor: hand;
+}
 button:before, button:after,
 a[href].button:before, a[href].button:after {
     content: attr(title);
@@ -71,30 +91,52 @@ a[href].button:hover{
 .headerbar{
 	padding: 3px 6px;
 	background:#f2f2f2;
-	background-image: linear-gradient(top, #f2f2f2 0%, #d5d5d5 100%);
-	background-image: -o-linear-gradient(top, #f2f2f2 0%, #d5d5d5 100%);
-	background-image: -moz-linear-gradient(top, #f2f2f2 0%, #d5d5d5 100%);
-	background-image: -webkit-linear-gradient(top, #f2f2f2 0%, #d5d5d5 100%);
-	background-image: -ms-linear-gradient(top, #f2f2f2 0%, #d5d5d5 100%);
-	border:1px solid #ababab;
+	background-image: linear-gradient(top, #f2f2f2 0%, #e5e5e5 100%);
+	background-image: -o-linear-gradient(top, #f2f2f2 0%, #e5e5e5 100%);
+	background-image: -moz-linear-gradient(top, #f2f2f2 0%, #e5e5e5 100%);
+	background-image: -webkit-linear-gradient(top, #f2f2f2 0%, #e5e5e5 100%);
+	background-image: -ms-linear-gradient(top, #f2f2f2 0%, #e5e5e5 100%);
+	border:1px solid #cfcfcf;
 	border-radius:4px;
 	color:#044c29;
 	z-index: 2;
 	position: relative;
+	text-shadow: -1px -1px white, 1px 1px #F7F7F7;
 }
+.headerbar .menu{
+	color:#999999;
+	font-size:16px;
+	float:right;
+	margin-right:5px;
+	line-height:26px;
+}
+.headerbar a[href]{
+	color:#999999;
+}
+
 .pagebanner{
 	position:relative;
 	top:-4px;
 }
 .pagebanner img{
+	margin-top:10px;
 	border-radius:4px;
+	border:1px solid #c2c2c2;
+	width:958px;
 }
+.pagebanner p{
+	position:absolute;
+	color:#044c29;
+	font-size:24px;
+	font-weight:bold;
+} 
 .minibox{
-	width:180px;
-	min-height:70px;
+	width:181px;
+	height:115px;
+	overflow:hidden;
 	display:inline-block;
-	padding:7px 10px;
-	margin: 10px 20px;
+	padding:16px 20px;
+	margin: 9px;
 	vertical-align: top;
 	border-radius:4px;
 	background:#f9f9f9;
@@ -112,11 +154,107 @@ a[href].button:hover{
 .minibox.last{
 	margin-right:0;
 }
+.minibox p{
+	color:#555555;
+	margin-top:8px;
+}
+.minibox p a[href]{
+	color:#3ca349;
+	display:block;
+	margin-top:20px;
+}
 
 .headlinebox{
 	position:relative;
+	margin-top:30px;
 }
 .headlinebox .headline{
 	display:inline-block;
 	width:60%;
+	margin-left:20px;
+}
+.headlinebox .headline p{
+	margin-top:5px;
+}
+
+.column-left, .column-right{
+	display:inline-block;
+	width:48%;
+	vertical-align: top;
+}
+.textleft{
+	text-align:left;
+}
+
+
+/*** Form Styles ***/
+input, textarea , input[type="checkbox"]{ 
+	padding: 9px;
+	border: solid 1px #E5E5E5;
+	outline: 0;
+	font: normal 13px/100% Verdana, Tahoma, sans-serif;
+	width: 200px;
+	background: #FFFFFF;
+	box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;  
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;  
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #eeeeee), to(#FFFFFF));  
+    background: -moz-linear-gradient(top, #FFFFFF, #eeeeee 1px, #FFFFFF 25px); 
+}
+
+textarea { 
+	width: 400px;
+	max-width: 400px;
+	height: 150px;
+	line-height: 150%;
+}
+input[type="checkbox"]{
+	width:20px;
+	/*position:absolute;
+	top:100px;
+	left:20px;*/
+}
+input[type="checkbox"]:after{
+	/*content: '&lt;input type="text" name="attr[name]" class="checkbox"&gt;';
+	display:block;*/
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus { 
+	border-color: #C9C9C9; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px; 
+}
+
+form label { 
+	display:inline-block;
+	margin-right: 10px; 
+	color: #666666; 
+	width:115px;
+	text-align: right;
+}
+form p{
+	margin:10px 0;
+}
+
+button {
+	width: auto;
+	padding: 9px 15px;
+	border: 0;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+/*** Fancybox overrides ***/
+div.fancybox-inner{
+ 	position:static;
+ }
+.fancybox-inner .title {
+	background:#349141;
+	position:absolute;
+	top:-15px;
+	left:-15px;
+	width:103%;
+	padding:10px;
+	border-radius:4px;
+	color:#fefefe;
 }

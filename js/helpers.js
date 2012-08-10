@@ -18,8 +18,16 @@
 	});
 
 	stash.helpers.extendGlobal('stash.helpers', {
+		reload: function(){
+			Backbone.history.loadUrl();
+			$(window).trigger('navigation', {
+				oldUrl: location.href,
+				newUrl: location.href
+			});
+		},
 		navigate: function(uri){
 			var oldUrl = location.href;
+			uri = '/TheStash/index.php'+uri;
 			if (uri.charAt(0)==='/' || uri.charAt(0)==='#') {uri = uri.substring(1);}
 			if ((location.hash && location.hash.substring(1) === uri) || (!location.hash && location.pathname.substring(1) === uri)){
 				stash.helpers.reload();

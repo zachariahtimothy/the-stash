@@ -1,5 +1,10 @@
 .right_header{
 	float:right;
 	line-height:110px;
-	margin-right:10px;
+}
+.right_header a[href]{
+	padding-right:5px;
+}
+.right_header .welcome{
+	padding-right:15px;
 }

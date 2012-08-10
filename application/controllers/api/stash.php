@@ -10,49 +10,36 @@ class Stash extends CI_Controller {
     }
 
     public function index(){
-
+ 		$errors = array();
+    	//Get 
     	$query = $this->db->query('
-			SELECT s.Id, s.Month, id.`Amount`, id.`Day`
-			FROM Stashes s 
-			INNER JOIN Incomes i on s.`Id` = i.`StashId`
-			LEFT OUTER JOIN IncomeDates id on i.`Id` = id.`IncomeId`
-			WHERE s.`UserId` = ?
-			AND s.`Month` = ?
-			AND id.`Day` < ?
-			', array($this->_user['Id'], date('n'), date('j')));
+			SELECT i.`id`, i.`note`, i.`amount`
+			FROM Incomes i
+			WHERE i.`userId` = ?
+			', array($this->_user['id'], date('n'), date('j')));
     	
     	if ($query->num_rows() > 0)
 	 	{	
 	 		$row = $query->row_array();
 	 		$data['stash'] = array(
-	 			'Id'        => $row['Id'], 
-	 			'Month'     => $row['Month'],
-	 			'MonthName' => $this->monthName($row['Month'])
+	 			'id'        => $row['id'], 
+	 			'month'     => $row['month'],
+	 			'month_name' => $this->monthName($row['month'])
 	 		);
-	 		$data['income'] = $row;
+	 		$data['json'] = array('income' => $row);
+	 	} else {
+	 		$errors[count($errors)] = array(
+	 			'type' => 'incomeerror', 
+	 			'message' => 'Income not setup yet. Please visit your <a href="/account" title="Click to visit your account">account</a> to set it up.'
+	 			);
 	 	}
 
-	 	$query = $this->db->query('
-			SELECT s.Id, s.Month, e.`Amount`, e.`Day`
-			FROM Stashes s 
-			INNER JOIN Expenses e on s.`Id` = e.`StashId`
-			WHERE s.`UserId` = ?
-			AND s.`Month` = ?
-			AND e.`Day` < ?
-			', array($this->_user['Id'], date('n'), date('j')));
-
-	 	if ($query->num_rows() > 0)
-	 	{	
-	 		$rows = $query->result_array();
-
-	 		$expense_amount = 0;
-	 		foreach ($rows as $row) {
- 				$expense_amount = $expense_amount + $row['Amount'];
-	 		}
-	 		
-	 		$data['expense'] = array('ExpensesLeft' => $expense_amount);
+	 	if ($errors){
+	 		$data['status'] = 404;
+	 		$data['json'] = $errors;
 	 	}
-	 	$this->load->view('a0-current-month', $data);		
+	 	
+		$this->load->view('json_view', $data);			
     }
 
     public function detail($stashId){
