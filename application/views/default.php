@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<base href="http://localhost:8888/TheStash/index.php/">
 		<title>The Stash</title>
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
 		<link rel="stylesheet" type="text/css" href="../css/mediaQueries.css">
