@@ -15,8 +15,7 @@ class User extends CI_Controller {
 			
 			$username = $this->input->post('email');
 	   		$userpass = $this->input->post('password');
-			//$username = 'zachariahtimothy@gmail.com';
-			//$userpass = 'dodgeramZZ';
+
 			$query = $this->db->query('
 				SELECT * 
 				FROM Users 
@@ -36,7 +35,8 @@ class User extends CI_Controller {
 		 		$this->_user = $row;
 		 	} else {
 		 		$message = "User ".$username." could not be found.";
-		 		$data['json'] = '{"status":"error: User '.$message.'"}';
+		 		$data['status'] = 404;
+		 		$data['json'] = '{"message":"User '.$message.'"}';
 		 	}
 
 	   		$this->load->view('json_view', $data);	

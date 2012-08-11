@@ -3,11 +3,13 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<base href="<?php echo $base_url;?>/index.php">
 		<title>The Stash</title>
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
 		<link rel="stylesheet" type="text/css" href="../css/mediaQueries.css">
 		<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css">
 
+		<link rel="stylesheet" type="text/css" href="../css/modules/common.css">
 		<link rel="stylesheet" type="text/css" href="../css/modules/header.css">
 		<link rel="stylesheet" type="text/css" href="../css/modules/footer.css">
 		<link rel="stylesheet" type="text/css" href="../css/modules/home.css">
@@ -21,6 +23,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/modules/error.css">
 		<link rel="stylesheet" type="text/css" href="../css/modules/account.css">
 
+		<link rel="template" href="../templates/modules/common.html">
 		<link rel="template" href="../templates/modules/header.html">
 		<link rel="template" href="../templates/modules/footer.html">
 		<link rel="template" href="../templates/modules/home.html">
@@ -69,6 +72,7 @@
 		<script src="../js/router.js"></script>
 		<script src="../js/setup.js"></script>
 
+		<script src="../js/modules/common.js"></script>
 		<script src="../js/modules/header.js"></script>
 		<script src="../js/modules/footer.js"></script>
 		<script src="../js/modules/home.js"></script>

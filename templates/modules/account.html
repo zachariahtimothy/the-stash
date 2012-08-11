@@ -10,42 +10,48 @@
 </script>
 
 <script type="text/html" id="account-expenses-tpl">
-	<div id="account-expenses">
-		<h3><a href="#">Expenses</a></h3>
-		<div class="container closed">
-			<p>Manage your monthly expenses</p>
-			<form>
-				<p>
-					<label>Amount:</label>
-					<input type="text" name="amount">
-				</p>
-				<p>
-					<label>Date:</label>
-					<input type="text" name="date">
-				</p>
-				<p>
-					<label>Note:</label>
-					<textarea name="note"></textarea>
-				</p>
-				<p><button type="submit">Save</button></p>
-			</form>
+	<div id="account-expenses" class="account-section {{#section_expenses}}active{{/section_expenses}}">
+		<h3><a href="/account/expenses">Expenses</a></h3>
+		<div class="container {{#section_expenses}}open{{/section_expenses}}{{^section_expenses}}closed{{/section_expenses}}">
+			<div class="column-left">
+				<p>Manage your monthly expenses</p>
+				<form>
+					<p>
+						<label>Amount:</label>
+						<input type="text" name="amount">
+					</p>
+					<p>
+						<label>Date:</label>
+						<input type="text" name="date">
+					</p>
+					<p class="textarea">
+						<label>Note:</label>
+						<textarea name="note"></textarea>
+					</p>
+					<p><label></label><button type="submit">Save</button></p>
+				</form>
+			</div>
+			<div class="column-right">
+				<h3>Existing Recurring</h3>
+				<ul id="expense-items-container"></ul>
+			</div>
 		</div>
 	</div>
 </script>	
 
 <script type="text/html" id="account-income-tpl">
-	<div id="account-income">
-		<h3><a href="#">Income</a></h3>
-		<div class="container closed">
+	<div id="account-income" class="account-section {{#section_income}}active{{/section_income}}">
+		<h3><a href="/account/income">Income</a></h3>
+		<div class="container {{#section_income}}open{{/section_income}}{{^section_income}}closed{{/section_income}}">
 			<p>stuff</p>
 		</div>
 	</div>
 </script>
 
 <script type="text/html" id="account-details-tpl">
-	<div id="account-details">
-		<h3><a href="#">Details</a></h3>
-		<div class="container closed">
+	<div id="account-details" class="account-section {{#section_details}}active{{/section_details}}">
+		<h3><a href="/account/details">Details</a></h3>
+		<div class="container {{#section_details}}open{{/section_details}}{{^section_details}}closed{{/section_details}}">
 			<p>stuff</p>
 		</div>
 	</div>

@@ -26,6 +26,7 @@
 					stash.helpers.navigate('/stash');
 				})
 				.fail(function(){
+					
 					//TODO: Add error here.
 				});
 				return false;

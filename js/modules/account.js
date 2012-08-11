@@ -1,22 +1,32 @@
 (function(){
 	stash.helpers.extendGlobal('stash.views', {
 		account: Backbone.View.extend({
-			events: {
-				'click h3 a[href]' : 'onHeaderClick'
+			initialize: function(){
+				var self = this;
+				if (self.options.section === 'expenses'){
+				}
+				return self;
 			},
 			render:function(){
 				var self = this;
 				self.data = {
-
+					expenses: []
 				};
+				self.data['section_' + self.options.section] = true;
+
+				var oldContainer = $('#account .active');
+				if (oldContainer.length > 0){
+					oldContainer.slideUp();
+				}
+
 				self.$el.html(ich['account-tpl'](self.data));
+
+				if (self.options.section === 'expenses'){
+					var view = new stash.views.commonExpenselistItem({collection: self.data.expenses}).render();
+					self.$('#expense-items-container').html(view.el);
+				}
+				
 				return self;
-			},
-			onHeaderClick: function(ev){
-				ev.preventDefault();
-				self.$('.container.open').slideUp().removeClass('open').addClass('closed');
-				$(ev.currentTarget).parent().parent().find('.container.closed').slideDown().addClass('open').removeClass('closed');
-				return false;
 			}
 		})
 	});

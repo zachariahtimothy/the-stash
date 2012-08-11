@@ -2,7 +2,7 @@
 	var C = stash.collections,
 	 	M = stash.models,
 	 	I = stash.identity;
-	var baseUrl = 'TheStash/index.php/';
+	var baseUrl = 'thestash/index.php/';
 	
 	
 	var AppRouter = Backbone.Router.extend({
@@ -108,10 +108,11 @@
 						} else {
 							errorTxt = 'Oops, we could not load your stash.  Please try again later';
 						}
-						var errorView = new stash.views.error({
-							model: new stash.models.Error({message:errorTxt})
-						}).render();
-						router._loadPage(errorView);
+						// var errorView = new stash.views.error({
+						// 	model: new stash.models.Error({message:errorTxt})
+						// }).render();
+						//router._loadPage(errorView);
+						stash.helpers.navigate('/account/income');
 					}
 				});
 			} else {

@@ -7,6 +7,7 @@ class Index extends CI_Controller {
 		parent::__construct();
 		//setup user for use in class
     	$this->_user = $this->session->userdata('theStashUser');
+    	$this->load->helper('url'); 
     }
 	/**
 	 * Index Page for this controller.
@@ -31,6 +32,7 @@ class Index extends CI_Controller {
 			//$data['user'] = '{"name" : "Zach Curtis", "id":"1", "type":"user"}';
 			$data['user'] = '{}';
 		}
+		$data['base_url'] = base_url();
 		$this->load->view('default', $data);
 	}
 }

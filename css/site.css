@@ -232,6 +232,9 @@ form label {
 	width:115px;
 	text-align: right;
 }
+form .textarea label{
+	vertical-align: top;
+}
 form p{
 	margin:10px 0;
 }
@@ -250,6 +253,11 @@ div.fancybox-inner{
  }
 .fancybox-inner .title {
 	background:#349141;
+	background-image: -webkit-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
+	background-image: -o-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
+	background-image: -moz-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
+	background-image: -ms-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
+	background-image: linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
 	position:absolute;
 	top:-15px;
 	left:-15px;
@@ -257,4 +265,8 @@ div.fancybox-inner{
 	padding:10px;
 	border-radius:4px;
 	color:#fefefe;
+	border:1px solid #044c29;
+	font-size:22px;
+	font-family: Helvetica Neue, helvetica, arial;
+	text-shadow: 0 1px 0 #45bf55;
 }
