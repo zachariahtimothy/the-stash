@@ -53,7 +53,6 @@ $db['default']['username'] = 'thestash';
 $db['default']['password'] = 'dodgeram';
 $db['default']['database'] = 'TheStash';
 $db['default']['dbdriver'] = 'mysql';
-$db['default']['port']     = 3306;
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
