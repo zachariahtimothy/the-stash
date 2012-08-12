@@ -1,9 +1,7 @@
 (function(){
 	stash.helpers.extendGlobal('stash.models', {
 		User: Backbone.Model.extend({
-			url: function(){
-				return '/users/' + (this.id ? '/'+this.id : '');
-			}
+			url: stash.settings.apiUrl +'users'
 		}),
 		Stash: Backbone.Model.extend({
 			url: stash.settings.apiUrl + 'stash'

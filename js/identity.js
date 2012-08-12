@@ -29,7 +29,7 @@
 				});
 				//TODO: Uncomment when login is ready
 				 $.ajax({
-					url: stash.settings.apiUrl + 'user/login',
+					url: stash.settings.apiUrl + 'users/login',
 					type: 'POST',
 					data: args,
 					success:function(result){
@@ -50,7 +50,7 @@
 				});
 
 				$.ajax({
-					url: stash.settings.apiUrl + 'user/logout',
+					url: stash.settings.apiUrl + 'users/logout',
 					contentType: 'application/json',
 					type: 'GET',
 					success:function(result){

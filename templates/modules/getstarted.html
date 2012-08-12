@@ -4,28 +4,30 @@
 		<p class="description">Congratulations! You are on your way to stop overspending and climb your way out of debt.</p>
 		<div class="column-left">
 			<form>
+				<input type="hidden" name="type" value="user">
+				<input type="hidden" name="facebookId" value="">
 				<p>
 					<label>Name:</label>
-					<input type="text" name="name">
+					<input type="text" name="name" required>
 				</p>
 				<p>
 					<label>Email:</label>
-					<input type="email" name="email">
+					<input type="email" name="email" required>
 				</p>
 				<p>&nbsp;</p>
 				<p>
 					<label>Password:</label>
-					<input type="text" name="password">
+					<input type="password" name="password" required>
 				</p>
 				<p class="note"><label>&nbsp;</label>*Password must be 5 characters and include at least 1 number</p>
 				</p>
 					<label>Password Again:</label>
-					<input type="password" name="password_again">
+					<input type="password" name="password_again" required>
 				</p>
 				<p>&nbsp;</p>
 				<p>
 					<label>&nbsp;</label>
-					<input type="checkbox" name="agree">
+					<input type="checkbox" name="agree" required>
 					I agree to the <a href="/termsofuse">Terms of Use</a>
 				</p>
 				<p>
