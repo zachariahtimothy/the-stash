@@ -2,8 +2,8 @@
 	stash.helpers.extendGlobal('stash.views', {
 		home: Backbone.View.extend({
 			events:{
-				'click .getstarted' : 'getStarted',
-				'click a[href]'     : 'onMoreClick'
+				'click .getstarted' 	 : 'getStarted',
+				'click .minibox a[href]' : 'onMoreClick'
 			},
 			render: function(){
 				var self = this;
