@@ -3,11 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<base href="<?php echo $base_url;?>/index.php">
+		<base href="<?php echo $base_url;?>index.php/">
 		<title>The Stash</title>
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
 		<link rel="stylesheet" type="text/css" href="../css/mediaQueries.css">
 		<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css">
+		<link rel="stylesheet" type="text/css" href="../css/custom-theme/jquery-ui.custom.css">
 
 		<link rel="stylesheet" type="text/css" href="../css/modules/common.css">
 		<link rel="stylesheet" type="text/css" href="../css/modules/header.css">
@@ -54,6 +55,7 @@
 		</script>
 		<script src="../js/lib/json2.js"></script>
 		<script src="../js/lib/jquery.js"></script>
+		<script src="../js/lib/jquery-ui.custom.min.js"></script>
 		<script src="../js/lib/underscore.js"></script>
 		<script src="../js/lib/backbone.js"></script>
 		<script src="../js/lib/ICanHaz.js"></script>
@@ -67,8 +69,9 @@
 		</script>
 		<script src="../js/helpers.js"></script>
 		<script src="../js/models.js"></script>
+		<script src="../js/collections.js"></script>
 		<script src="../js/identity.js"></script>
-		<script src="../js/controllers.js"></script>
+		<script src="../js/domain.js"></script>
 		<script src="../js/router.js"></script>
 		<script src="../js/setup.js"></script>
 

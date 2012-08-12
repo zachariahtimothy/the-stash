@@ -1,11 +1,32 @@
 #account .container{
 	padding:5px 0px 5px 20px;
+	display:none;
 }
 #account .container.closed{
 	display:none;
 }
 #account .container.open{
 	display:block;
+}
+#account .container .column-right h3{
+	margin-bottom:4px;
+}
+#account .container .column-right.existing{
+	background: #dedede;
+	padding:10px;
+}
+#account #list-items-container{
+	height:250px;
+	overflow-y: scroll;
+	overflow-x:hidden;
+}
+#account #list-items-container li{
+	padding:8px 5px;
+}
+#account #list-items-container li:hover{
+	background: #ffffff;
+	border:1px solid #ddd;
+	padding:7px 4px;
 }
 
 #account .headerbar{
@@ -32,14 +53,34 @@
 }
 
 /*** Account expenses ***/
-#account #account-expenses .column-left{
-	width:70%;
-}
-#account #account-expenses .column-right{
+#account .column-right.main{
 	width:250px;
-	border:1px solid red;
+	float:right;
 }
-#account #account-expenses textarea{
+#account #account-expenses textarea,
+#account #account-income textarea{
 	width:300px;
 	height:100px;
+}
+#account #expense-items-container li{
+	margin:4px 0;
+}
+#account #expense-items-container li .column-left,
+#account #expense-items-container li .column-right{
+	width:48%;
+}
+#account #expense-items-container li .column-right{
+	text-align: right;
+}
+
+/*** Account Income ***/
+#account #account-income .column-left.main{
+	width:53%;
+}
+#account #account-income .column-right.main{
+	float:right;
+}
+
+#account #account-income form label{
+	width:inherit;
 }

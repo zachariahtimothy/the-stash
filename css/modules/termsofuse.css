@@ -2,3 +2,8 @@
 	margin-top:20px;
 	padding:0px 7px;
 }
+
+#termsofuse ul, #termsofuse li{
+	list-style: disc;
+	margin:10px;
+}

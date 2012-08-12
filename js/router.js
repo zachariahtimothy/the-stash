@@ -87,12 +87,12 @@
 				var model = new M.Stash(null)
 				model.fetch({
 					success: function(result){
-						var result = resultModel.toJSON();
+						// var result = resultModel.toJSON();
 						if (result.has('stasherror')){
 							var errors = result.get('stasherror');
 
 						} else {
-							var view = new stash.views.currentStash().render();
+							var view = new stash.views.currentStash({model:result}).render();
 							router._loadPage(view);
 						}
 						

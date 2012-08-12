@@ -20,13 +20,9 @@ class Stash extends CI_Controller {
     	
     	if ($query->num_rows() > 0)
 	 	{	
-	 		$row = $query->row_array();
-	 		$data['stash'] = array(
-	 			'id'        => $row['id'], 
-	 			'month'     => $row['month'],
-	 			'month_name' => $this->monthName($row['month'])
-	 		);
-	 		$data['json'] = array('income' => $row);
+	 		$row = $query->result_array();
+	 		$data['stash'] = $row;
+	 		$data['json'] = array('incomes' => $row);
 	 	} else {
 	 		$errors[count($errors)] = array(
 	 			'type' => 'incomeerror', 

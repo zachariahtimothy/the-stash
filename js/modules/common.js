@@ -1,12 +1,16 @@
 (function(){
 	stash.helpers.extendGlobal('stash.views', {
-		commonExpenselistItem: Backbone.View.extend({
+		commonlistItem: Backbone.View.extend({
 			render:function(){
 				var self = this;
-				self.data = {
 
+				self.data = {	
+					items: []
 				};
-				self.$el.html(ich['common-expenselist-item-tpl'](self.data));
+				self.collection.forEach(function(item){
+					self.data.items.push(item.toJSON());
+				});
+				self.$el.html(ich['common-list-item-tpl'](self.data));
 				return self;
 			}
 		})

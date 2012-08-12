@@ -2,3 +2,8 @@
 	margin-top:20px;
 	padding:0px 7px;
 }
+
+#privacypolicy ul, #privacypolicy li{
+	list-style: disc;
+	margin: 10px;
+}

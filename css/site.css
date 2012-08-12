@@ -16,6 +16,9 @@ ul, h1, h2, h3, h4, p{
 	margin:0;
 	padding:0;
 }
+ul, li{
+	list-style:none;
+}
 h1{
 	font-size:26px;
 }
@@ -44,7 +47,9 @@ a[href]:hover{
 #content p.description{
 	margin:10px;
 }
-
+.content{
+	margin:10px;
+}
 .logo{
 	background:url(../images/logo.png) no-repeat;
 	display:inline-block;
@@ -245,6 +250,10 @@ button {
 	border: 0;
 	font-size: 14px;
 	color: #FFFFFF;
+}
+
+form.alternate label{
+	width:inherit;
 }
 
 /*** Fancybox overrides ***/

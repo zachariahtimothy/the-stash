@@ -2,7 +2,8 @@
 	stash.helpers.extendGlobal('stash.views', {
 		home: Backbone.View.extend({
 			events:{
-				'click .getstarted' : 'getStarted'
+				'click .getstarted' : 'getStarted',
+				'click a[href]'     : 'onMoreClick'
 			},
 			render: function(){
 				var self = this;
@@ -12,6 +13,16 @@
 
 			getStarted: function(ev){
 				
+			},
+			onMoreClick: function(ev){
+				ev.preventDefault();
+				var moreText = $(ev.currentTarget).data('more');
+				$('<div/>', {
+					html: moreText
+				}).dialog({
+					modal:true
+				});
+				return false;
 			}
 		})
 	});

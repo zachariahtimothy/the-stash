@@ -10,6 +10,21 @@
 		}),
 		Error: Backbone.Model.extend({
 			
+		}),
+		Income: Backbone.Model.extend({
+			url: stash.settings.apiUrl + 'incomes'
+		}),
+		Expense: Backbone.Model.extend({
+			url: stash.settings.apiUrl + 'expenses'
+		}),
+		Frequency: Backbone.Model.extend({
+			url: stash.settings.apiUrl + 'domain/frequency'
+		}),
+		Category: Backbone.Model.extend({
+			url: stash.settings.apiUrl + 'domain/category'
+		}),
+		Domain: Backbone.Model.extend({
+			url: stash.settings.apiUrl + 'domain'
 		})
 	});
 
@@ -27,5 +42,10 @@
 			}
 			return defer.promise();
 		}
+		// ,
+		// save: function(options){
+		// 	var p = this;
+		// 	debugger;
+		// }
 	})
 })();

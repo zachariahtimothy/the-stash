@@ -10,10 +10,10 @@
 </script>
 
 <script type="text/html" id="account-expenses-tpl">
-	<div id="account-expenses" class="account-section {{#section_expenses}}active{{/section_expenses}}">
+	<div id="account-expenses" class="account-section expenses {{#section_expenses}}active{{/section_expenses}}">
 		<h3><a href="/account/expenses">Expenses</a></h3>
-		<div class="container {{#section_expenses}}open{{/section_expenses}}{{^section_expenses}}closed{{/section_expenses}}">
-			<div class="column-left">
+		<div class="container">
+			<div class="column-left main">
 				<p>Manage your monthly expenses</p>
 				<form>
 					<p>
@@ -24,6 +24,18 @@
 						<label>Date:</label>
 						<input type="text" name="date">
 					</p>
+					<p>
+						<label></label>
+						<select name="category" required>
+							<option value="0">Category...</option>
+							<option value="add">*Add a Category</option>
+							{{#domain}}
+								{{#categories}}
+									<option value="{{id}}">{{name}}</option>
+								{{/categories}}
+							{{/domain}}
+						</select>
+					</p>
 					<p class="textarea">
 						<label>Note:</label>
 						<textarea name="note"></textarea>
@@ -31,28 +43,88 @@
 					<p><label></label><button type="submit">Save</button></p>
 				</form>
 			</div>
-			<div class="column-right">
+			<div class="column-right existing main">
 				<h3>Existing Recurring</h3>
-				<ul id="expense-items-container"></ul>
+				<ul id="list-items-container"></ul>
 			</div>
 		</div>
 	</div>
 </script>	
 
 <script type="text/html" id="account-income-tpl">
-	<div id="account-income" class="account-section {{#section_income}}active{{/section_income}}">
+	<div id="account-income" class="account-section income {{#section_income}}active{{/section_income}}">
 		<h3><a href="/account/income">Income</a></h3>
-		<div class="container {{#section_income}}open{{/section_income}}{{^section_income}}closed{{/section_income}}">
-			<p>stuff</p>
+		<div class="container">
+			<div class="column-left main">
+				<p>Manage your income</p>
+				<form>
+					<div class="column-left">
+						<p>
+							<label>Amount:</label>
+							<input type="text" name="amount" required>
+						</p>
+						<p>
+							<label>Date:</label>
+							<input type="text" name="date" required>
+						</p>
+						<p>
+							<select name="frequency" required>
+								<option value="0">Frequency...</option>
+								{{#domain}}
+									{{#frequencies}}
+										<option value="{{id}}">{{name}}</option>
+									{{/frequencies}}
+								{{/domain}}
+							</select>
+						</p>
+					</div>
+					<div class="column-right">
+						<p>
+							<select name="category" required>
+								<option value="0">Category...</option>
+								<option value="add">*Add a Category</option>
+								{{#domain}}
+									{{#categories}}
+										<option value="{{id}}">{{name}}</option>
+									{{/categories}}
+								{{/domain}}
+							</select>
+						</p>
+						<p class="textarea">
+							<label>Note:</label>
+							<textarea name="note"></textarea>
+						</p>
+						<p><button type="submit">Save</button></p>
+					</div>
+				</form>
+			</div>
+			<div class="column-right main">
+				<h3>Existing Recurring</h3>
+				<ul id="list-items-container"></ul>
+			</div>
 		</div>
 	</div>
 </script>
 
 <script type="text/html" id="account-details-tpl">
-	<div id="account-details" class="account-section {{#section_details}}active{{/section_details}}">
+	<div id="account-details" class="account-section details {{#section_details}}active{{/section_details}}">
 		<h3><a href="/account/details">Details</a></h3>
-		<div class="container {{#section_details}}open{{/section_details}}{{^section_details}}closed{{/section_details}}">
+		<div class="container">
 			<p>stuff</p>
 		</div>
 	</div>
+</script>
+
+
+<script type="text/html" id="account-add-domainbyname-tpl">
+	<form class="alternate">
+		<input type="hidden" name="type" value="income">
+		<p>
+			<label>Name:</label><br />
+			<input type="text" name="name">
+		</p>
+		<p>
+			<button type="submit">Save</button>
+		</p>
+	</form>
 </script>

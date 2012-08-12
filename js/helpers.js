@@ -75,6 +75,16 @@
 				defer.resolve();
 			});
 			return defer.promise();
+		},
+		getBackboneError: function(error){
+			var result = JSON.parse(error.responseText);
+			return {
+				message: result.message,
+				status: error.status
+			};
+		},
+		capitalizeFirstLetter: function(string){
+			return string.charAt(0).toUpperCase() + string.slice(1);
 		}
 	});
 })();

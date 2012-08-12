@@ -1,5 +1,15 @@
-<script type="text/html" id="common-expenselist-item-tpl">
-	{{#expense_items}}
-		<li>Expense item here</li>
-	{{/expense_items}}
+<script type="text/html" id="common-list-item-tpl">
+	{{#items}}
+		<li data-id="{{id}}">
+			<div class="column-left">
+				<div class="amount">${{amount}}</div>
+				<div class="category">{{name}}</div>
+			</div>
+			<div class="column-right">
+				<div class="date">{{date}}</div>
+				<a href="#">edit</a>
+				<a href="#">delete</a>
+			</div>
+		</li>
+	{{/items}}
 </script>

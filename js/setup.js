@@ -1,11 +1,12 @@
 (function(){
+
 	ich.grabTemplates();
 
 	var getTemplates = new $.Deferred();
 	var getUser = new $.Deferred();
 
-	$.when(getTemplates, getUser)
-	.done(function(templates, user){
+	$.when(getTemplates, getUser, stash.domain.fetch())
+	.done(function(templates, user, domainData){
 		Backbone.history.start({pushState: true});
 	});
 
@@ -60,6 +61,23 @@
 		stash.helpers.navigate(link);
 	});
 
+	$.fn.serializeObject = function(){
+	    var o = {};
+	    $.each(this.serializeArray(), function() {
+	        if (o[this.name] !== undefined) {
+	            if (!o[this.name].push) {
+	                o[this.name] = [o[this.name]];
+	            }
+	            o[this.name].push(this.value || '');
+	        } else {
+	            o[this.name] = this.value || '';
+	        }
+	    });
+	    return o;
+	};
+
 })();
+
+
 
 
