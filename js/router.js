@@ -18,20 +18,21 @@
 			Backbone.Router.prototype.constructor.call(this, options);
 		},
 		routes: {
-			'routekey' : 'actualroute',
-			'home'          : 'home',
-			'aboutus'       : 'aboutus',
-			'contactus'     : 'contactus',
-			'termsofuse'    : 'termsofuse',
-			'privacypolicy' : 'privacypolicy',
-			'getstarted'    : 'getstarted',
+			'routekey' 			: 'actualroute',
+			'home'          	: 'home',
+			'aboutus'       	: 'aboutus',
+			'contactus'     	: 'contactus',
+			'termsofuse'    	: 'termsofuse',
+			'privacypolicy' 	: 'privacypolicy',
+			'getstarted'    	: 'getstarted',
+			'resetpassword/:id' : 'resetpassword',
 
-			'stash'         : 'currentStash',
-			'stash/details' : 'stashDetails',
-			'account/:page'	: 'account',
-			'account'		: 'account',
+			'stash'         	: 'currentStash',
+			'stash/details' 	: 'stashDetails',
+			'account/:page'		: 'account',
+			'account'			: 'account',
 			
-			'*catchall'     : 'catchAll'
+			'*catchall'     	: 'catchAll'
 		},
 		_loadHeader: function(){
 			var view = new stash.views.header().render();
@@ -104,6 +105,12 @@
 		getstarted: function(){
 			router._loadHeader();
 			var view = new stash.views.getStarted().render();
+			router._loadPage(view);
+			router._loadFooter();
+		},
+		resetpassword:function(id){
+			router._loadHeader();
+			var view = new stash.views.resetPassword({resetId: id}).render();
 			router._loadPage(view);
 			router._loadFooter();
 		},

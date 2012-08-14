@@ -11,7 +11,7 @@
 			render:function(){
 				var self = this;
 				self.data = {
-					email = self.email || null
+					email : self.email || null
 				};
 				self.$el.html(ich['login-tpl'](self.data));
 
@@ -92,14 +92,18 @@
 				self.$el.html(view.el);
 			}
 
-		}),
+		})
+		,
 		forgotPassword: Backbone.View.extend({
 			events:{
 				'submit form' : 'onSubmit'
 			},
 			render: function(){
 				var self = this;
-				self.$el.html(ich['forgot-password-tpl']);
+				self.data = {
+					hostname: location.hostname
+				};
+				self.$el.html(ich['forgot-password-tpl'](self.data));
 				return self;
 			},
 			onSubmit: function(ev){
@@ -114,6 +118,46 @@
 						$('<div/>',{html: stash.helpers.getBackboneError(error)}).dialog();
 					}
 				})
+				return false;
+			}
+		}),
+		resetPassword: Backbone.View.extend({
+			events:{
+				'submit form' : 'onSubmit'
+			},
+			render: function(){
+				var self = this;
+				self.data = {
+					reset_id: self.options.resetId
+				};
+				self.$el.html(ich['reset-password-tpl'](self.data));
+				return self;
+			},
+			onSubmit: function(ev){
+				ev.preventDefault();
+				var self = this;
+				var form = $(ev.currentTarget);
+				$.ajax({
+					url: stash.settings.apiUrl +'users/resetPassword',
+					type: 'POST',
+					dataType: 'json',
+					data: JSON.stringify(form.serializeObject()),
+					success:function(result){
+						stash.helpers.navigate('/stash');
+					},
+					error: function(xhrError){
+						var error = stash.helpers.getBackboneError(xhrError); 
+						$('<div/>', {html: error.message}).dialog({
+							title: 'Error',
+							modal: true,
+							buttons:{
+								Ok: function(){
+									$(this).dialog('close');
+								}
+							}
+						});
+					}
+				});
 				return false;
 			}
 		})
