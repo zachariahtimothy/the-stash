@@ -4,6 +4,19 @@
 #login .or{
 	margin:20px 0;
 }
-.fancybox-inner #login{
-	padding-top:60px;
+#login form.alternate p label{
+	text-align:left;
+	display:block;
+	padding-left:27px;
+}
+#login form .textleft{
+	position:relative;
+}
+#login button{
+	margin-left:26px;
+}
+#login .forgot{
+	position: absolute;
+	right: 25px;
+	top: 30%;
 }

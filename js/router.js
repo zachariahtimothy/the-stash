@@ -44,10 +44,37 @@
 		_loadPage: function(view){
 			$('#content').html(view.el);
 			//$(window).on('navigation', function(){
-				$.fancybox.close();
+				//$.fancybox.close();
 			//});
 		},
+		_login: function(){
+			var deferred = $.Deferred();
 
+			var loginView = new stash.views.login().render();
+			var loginBox = loginView.$el.dialog({
+				title : 'Login',
+				modal : true,
+				close: function(event, ui) {
+					stash.helpers.navigate('/home');
+					$('<div/>', {
+						html: 'Sorry but you must be logged in to access this page.'
+					}).dialog({
+						modal:true,
+						title: 'Error',
+						buttons: {
+							Ok: function() {
+								$( this ).dialog( "close" );
+								
+							}
+						}
+					});
+				}
+			});
+			loginView.on('stash.login', function(data){
+				deferred.resolve(data);
+			});
+			return deferred.promise();
+		},
 		home: function(){
 			router._loadHeader();
 			var view = new stash.views.home().render();
@@ -81,9 +108,8 @@
 			router._loadFooter();
 		},
 		currentStash: function(){
-			if (stash.identity.amLoggedIn()){
-				router._loadHeader();
-				router._loadFooter();
+			router._loadHeader();
+			if (stash.identity.amLoggedIn()){	
 				var model = new M.Stash(null)
 				model.fetch({
 					success: function(result){
@@ -117,34 +143,36 @@
 				});
 			} else {
 				//Load home page and pop login box if user attempts to load stash without being logged in.
-				stash.helpers.navigate('/home');
-				var loginView = new stash.views.login().render();
-				var loginBox = $.fancybox.open({
-					content: loginView.$el,
-					title : 'Login',
-					helpers:  {
-				    	title : {
-				        	type : 'over'
-				   		}
-				   	}
+				//stash.helpers.navigate('/home');
+				router._login().done(function(user){
+					router.currentStash();
 				});
-				
 			}
-			
-			
+			router._loadFooter();
 		},
 		stashDetails: function(){
 			router._loadHeader();
-			router._loadPage(new stash.views.stashDetails().render());
+			if (stash.identity.amLoggedIn()){
+				router._loadPage(new stash.views.stashDetails().render());
+			} else{
+
+			}
 			router._loadFooter();
 		},
 		account: function(page){
 			router._loadHeader();
-			if (!page){
-				page = 'expenses';
+			if (stash.identity.amLoggedIn()){
+				if (!page){
+					page = 'expenses';
+				}
+				var view = new stash.views.account({section: page}).render();
+				router._loadPage(view);
+			} else {
+				router._login().done(function(){
+					var view = new stash.views.account({section: page}).render();
+					router._loadPage(view);
+				});
 			}
-			var view = new stash.views.account({section: page}).render();
-			router._loadPage(view);
 			router._loadFooter();
 
 		},

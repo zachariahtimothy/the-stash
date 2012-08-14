@@ -23,6 +23,12 @@
 		}),
 		Domain: Backbone.Model.extend({
 			url: stash.settings.apiUrl + 'domain'
+		}),
+		Email: Backbone.Model.extend({
+			url: stash.settings.apiUrl +'email',
+			send: function(key, value, options){
+				return Backbone.Model.prototype.save.call(this, key, value, options);
+			}
 		})
 	});
 

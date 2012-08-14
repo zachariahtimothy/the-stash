@@ -55,12 +55,13 @@ class Domain extends CI_Controller {
     // }
 
     public function category(){
-       if ($_SERVER['REQUEST_METHOD'] == "POST"){
+       if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($this->_user)){
             $request_body = file_get_contents('php://input');
             $postData = json_decode($request_body);
             $dbData = array(
-                'name' => $postData->name,
-                'type' => $postData->type
+                'name'   => $postData->name,
+                'type'   => $postData->type,
+                'userId' => $this->_user['id']
             );
             try{
                 $this->db->insert('Categories', $dbData);
@@ -94,7 +95,9 @@ class Domain extends CI_Controller {
     private function getCategories(){
     	$query = $this->db->query('
 			SELECT c.`id`, c.`name`, c.`type`
-			FROM Categories c');
+			FROM Categories c
+            WHERE c.userId = ?
+            ', array($this->_user['id']));
 
     	if ($query->num_rows() > 0) {	
 	 		$row = $query->result_array();

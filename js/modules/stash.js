@@ -5,7 +5,12 @@
 		currentStash: Backbone.View.extend({
 			render: function(){
 				var self = this;
-				self.$el.html(ich['currentstash-tpl']());
+				self.data = {
+					today: {},
+					week:{},
+					month:{}
+				}
+				self.$el.html(ich['currentstash-tpl'](self.data));
 				return self;
 			}
 		})

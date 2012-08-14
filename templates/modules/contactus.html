@@ -4,20 +4,32 @@
 		<form>
 			<p>
 				<label>Name:</label>
-				<input type="text" name="name">
+				<input type="text" name="name" required>
 			</p>
 			<p>
 				<label>Email:</label>
-				<input type="email" name="email">
+				<input type="email" name="email" required>
 			</p>
-			<p>
+			<p class="textarea">
 				<label>Message:</label>
-				<textarea name="message"></textarea>
+				<textarea name="message" required></textarea>
 			</p>
 			<p>
 				<label>&nbsp;</label>
 				<button type="submit">Submit</button>
 			</p>
 		</form>
+	</div>
+</script>
+
+<script type="text/html" id="contactus-confirmation-tpl">
+	<div id="contactus">
+		<h2 class="headerbar">Success!</h2>
+		<div class="content">
+			<p>
+			Your message has been successfully sent to the crew at The Stash.  We will review your message and get back to you as soon as possible.  
+			Have a great day!
+			</p>
+		</div>
 	</div>
 </script>

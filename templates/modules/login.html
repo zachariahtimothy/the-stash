@@ -1,21 +1,35 @@
 <script type="text/html" id="login-tpl">
-	<div class="title">Login</div>
 	<div id="login">
-		<button class="facebook"><i class="icon-facebook"></i> Connect with Facebook</button>
+		<a class="facebook" href="#"><span><i class="icon-facebook"></i> Connect with Facebook</span></a>
 		<p class="or">- OR -</p>
-		<form>
+		<form class="alternate">
 			<p>
 				<label>Email:</label>
-				<input type="email" name="email" required>
+				<input type="email" name="email" value="{{email}}" required>
 			</p>
 			<p>
 				<label>Password:</label>
 				<input type="password" name="password" required>
 			</p>
 			<p class="textleft">
-				<label></label>
 				<button type="submit">Login</button>
-				<a href="#">Forgot Password</a>
+				<a href="#" class="forgot">Forgot Password</a>
+			</p>
+		</form>
+	</div>
+</script>
+
+<script type="text/html" id="forgot-password-tpl">
+	<div id="forgotPassword">
+		<p>Enter your email address and we will email your password to you.</p>
+		<form>
+			<p>
+				<label>Email:</label>
+				<input type="email" name="email" required>
+			</p>
+			<p>
+				<label></label>
+				<button type="submit">Submit</button>
 			</p>
 		</form>
 	</div>

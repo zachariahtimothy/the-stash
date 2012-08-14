@@ -1,0 +1,59 @@
+#currentStash .column-left{
+	margin-top:20px;
+}
+#currentStash .column-right{
+	margin-top:40px;
+}
+#currentStash .column-left h3{
+	color:#252525;
+	display:inline-block;
+	width:98%;
+	background:#ebebeb;
+	border-top:1px solid #bebebe;
+	padding:5px 0px 5px 20px;
+}
+
+#currentStash .column-right{
+	margin-left: 30px;
+}
+#currentStash .column-right img{
+	margin-top:12px;
+	max-width:210px;
+	max-height: 145px;
+	border:2px solid #dadada;
+}
+
+#currentStash .submenu{
+	float:right;
+	margin:10px 0;
+}
+#currentStash .column-left ul{
+	display:inline-block;
+	padding:10px;
+	vertical-align: top;
+}
+
+#currentStash .label-column{
+	color:#666666;
+	font-size:16px;
+	text-align:right;
+	margin-right:20px;
+	margin-left:20px;
+}
+#currentStash .label-column li{
+	position:relative;
+}
+#currentStash .label-column li .label{
+	display:inline-block;
+}
+#currentStash .total-column{
+	background:#e6e6e6;
+	border-left:1px solid #bfbfbf;
+	border-right:1px solid #bfbfbf;
+	color:#36b14a;
+	font-size:18px;
+}
+#currentStash .dollar-sign{
+	color:#b5b5b5;
+
+}

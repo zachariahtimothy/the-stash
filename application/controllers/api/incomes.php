@@ -12,8 +12,8 @@ class Incomes extends CI_Controller {
     public function index(){
     	if ($_SERVER['REQUEST_METHOD'] == "GET") {
     		$incomes = $this->get();
-    		if (array_key_exists('status',$incomes) && $incomes['status'] == 400){
-    			$data['status'] = 400;
+    		if (array_key_exists('status',$incomes) && $incomes['status'] == 404){
+    			$data['status'] = 404;
     			$data['json'] = $incomes;
     		} else {
     			$data['json'] = $incomes;
@@ -40,8 +40,8 @@ class Incomes extends CI_Controller {
 	 		
 			$data = $row;
 	 	} else {
-	 		$data['status'] = 400;
-	 		$data['error'] = '{message:No incomes}';
+	 		$data['status'] = 404;
+	 		$data['error'] = 'No incomes';
 	 	}
 	 	return $data;
     }

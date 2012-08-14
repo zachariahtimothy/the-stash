@@ -3,7 +3,8 @@
 	stash.helpers.extendGlobal('stash.views', {
 		header: Backbone.View.extend({
 			events:{
-				'click .logout' : 'onLogout'
+				'click .login'  : 'onLoginClick',
+				'click .logout' : 'onLogoutClick'
 			},
 			initialize: function(){
 				var self = this;
@@ -19,16 +20,25 @@
 				};
 
 				self.$el.html(ich['header-tpl'](self.data));
-
-				var loginView = new stash.views.login().render();
-				var loginBox = self.$('.login').fancybox({
-					content: loginView.$el
-				});
-
-				return this;
+				
+				return self;
 			},
-
-			onLogout: function(ev){
+			onLoginClick: function(ev){
+				var loginView = new stash.views.login().render();
+				var loginDialog = loginView.$el.dialog({
+					modal: true,
+					title: 'Login',
+					open: function(event, ui) {
+						loginView.$('input[name="email"]').focus();
+					}
+				});
+				loginView.on('stash.login', function(data){
+					loginDialog.dialog('destroy');
+					stash.helpers.navigate('/stash');
+				})
+				
+			},
+			onLogoutClick: function(ev){
 				ev.preventDefault();
 				var self = this;
 				I.logMeOut()

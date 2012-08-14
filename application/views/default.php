@@ -5,10 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 		<base href="<?php echo $base_url;?>index.php/">
 		<title>The Stash</title>
-		<link rel="stylesheet" type="text/css" href="../css/site.css">
 		<link rel="stylesheet" type="text/css" href="../css/mediaQueries.css">
-		<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css">
 		<link rel="stylesheet" type="text/css" href="../css/custom-theme/jquery-ui.custom.css">
+		<link rel="stylesheet" type="text/css" href="../css/site.css">
 
 		<link rel="stylesheet" type="text/css" href="../css/modules/common.css">
 		<link rel="stylesheet" type="text/css" href="../css/modules/header.css">
@@ -45,6 +44,25 @@
 		<div id="fb-root"></div>
 
 		<script>
+			window.fbAsyncInit = function() {
+          		FB.init({
+	            appId      : '354627471275289', // App ID
+	            channelUrl : '//'+window.location.hostname+'/channel.html', // Channel File
+	            status     : true, // check login status
+	            cookie     : true, // enable cookies to allow the server to access the session
+	            xfbml      : true  // parse XFBML
+	          });
+	          // Additional initialization code here
+	        };
+	        // Load the SDK Asynchronously
+	        (function(d){
+	           var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	           if (d.getElementById(id)) {return;}
+	           js = d.createElement('script'); js.id = id; js.async = true;
+	           js.src = "//connect.facebook.net/en_US/all.js";
+	           ref.parentNode.insertBefore(js, ref);
+	         }(document));
+
 			var stash = {};
 			//Bootstrap this bad boy.
 			<?php 
@@ -59,7 +77,6 @@
 		<script src="../js/lib/underscore.js"></script>
 		<script src="../js/lib/backbone.js"></script>
 		<script src="../js/lib/ICanHaz.js"></script>
-		<script src="../js/lib/jquery.fancybox.js"></script>
 
 		<script>
 			var stash = stash || {};
