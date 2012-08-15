@@ -47,7 +47,7 @@
 						if (self.options.section === 'income'){
 							return category.type==='income';
 						} else if (self.options.section === 'expenses'){
-							return category.type==='expense';
+							return category.type==='expenses';
 						}
 					});
 					self.render();
@@ -76,18 +76,22 @@
 				.find('input[name="date"]').datepicker({"dateFormat":'yy-mm-dd'});
 				
 				self.on('listUpdated', function(result){
-					console.log('result collection: ', result)
 					var view = new stash.views.commonlistItem({collection: result}).render();
-					self.$('#list-items-container').html(view.el);
+					// Use set timeout because payload returns before page render complete;
+					setTimeout(function(){
+						self.$('#list-items-container').html(view.el);
+					}, 10)
+					
 				});
 
 				return self;
 			},
 			onSelectChange: function(ev){
 				var select =  $(ev.currentTarget);
+				var self = this;
 				var isAddNew = select.val() === 'add';
 				if (isAddNew){
-					var view = new stash.views.accountAddDomainData().render();
+					var view = new stash.views.accountAddDomainData({type: self.options.section}).render();
 					view.$el.dialog({
 						modal: true,
 						title: 'Add a ' + stash.helpers.capitalizeFirstLetter(select.attr('name'))
@@ -178,7 +182,10 @@
 			},
 			render: function(){
 				var self = this;
-				self.$el.html(ich['account-add-domainbyname-tpl']);
+				self.data = {
+					type: self.options.type
+				};
+				self.$el.html(ich['account-add-domainbyname-tpl'](self.data));
 				return self;
 			},
 			onSubmit: function(ev){

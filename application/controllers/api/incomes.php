@@ -63,6 +63,7 @@ class Incomes extends CI_Controller {
     		//var_dump($data);
     		$this->db->insert('Incomes', $data);
     		$incomeId = $this->db->insert_id();
+            $data['id'] = $incomeId;
     		$incomeDateData = array('incomeId' => $incomeId, 'date' => $postData->date);
 
     		$this->db->insert('IncomeDates', $incomeDateData);

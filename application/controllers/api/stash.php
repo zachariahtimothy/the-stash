@@ -11,24 +11,21 @@ class Stash extends CI_Controller {
 
     public function index(){
  		$errors = array();
-    	//Get 
-    	$query = $this->db->query('
-			SELECT i.`id`, i.`note`, i.`amount`
-			FROM Incomes i
-			WHERE i.`userId` = ?
-			', array($this->_user['id'], date('n'), date('j')));
-    	
-    	if ($query->num_rows() > 0)
-	 	{	
-	 		$row = $query->result_array();
-	 		$data['stash'] = $row;
-	 		$data['json'] = array('incomes' => $row);
-	 	} else {
-	 		$errors[count($errors)] = array(
-	 			'type' => 'incomeerror', 
-	 			'message' => 'Income not setup yet. Please visit your <a href="/account" title="Click to visit your account">account</a> to set it up.'
-	 			);
+    	 
+	 	$incomes = $this->getIncomes();
+	 	$expenses = $this->getExpenses();
+
+	 	if (count($incomes) == 0) {
+	 		$errors['incomeserror'] = array('message' => 'No incomes defined, please set income up in your account');
 	 	}
+	 	if (count($expenses) == 0) {
+	 		$errors['expenseserror'] = array('message' => 'No expenses defined, please set income up in your account');
+	 	}
+
+ 		$data['json'] = array(
+ 			'incomes'  => $incomes,
+ 			'expenses' => $expenses
+		);
 
 	 	if ($errors){
 	 		$data['status'] = 404;
@@ -36,6 +33,40 @@ class Stash extends CI_Controller {
 	 	}
 	 	
 		$this->load->view('json_view', $data);			
+    }
+
+    private function getExpenses(){
+    	$data = array();
+    	$query = $this->db->query('
+			SELECT e.`id`, e.`note`, e.`amount`, ed.date
+			FROM Expenses e
+			INNER JOIN ExpenseDates ed on e.id = ed.expenseId
+			WHERE e.`userId` = ?
+			', array($this->_user['id'], date('n'), date('j')));
+    	
+    	if ($query->num_rows() > 0)
+	 	{	
+	 		$row = $query->result_array();
+	 		$data = $row;
+	 	}
+	 	return $data;
+    }
+
+    private function getIncomes(){
+    	$data = array();
+    	$query = $this->db->query('
+			SELECT i.`id`, i.`note`, i.`amount`, id.date
+			FROM Incomes i
+			INNER JOIN IncomeDates id on i.id = id.incomeId
+			WHERE i.`userId` = ?
+			', array($this->_user['id'], date('n'), date('j')));
+    	
+    	if ($query->num_rows() > 0)
+	 	{	
+	 		$row = $query->result_array();
+	 		$data = $row;
+	 	}
+	 	return $data;
     }
 
     public function detail($stashId){

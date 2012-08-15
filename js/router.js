@@ -34,6 +34,7 @@
 			
 			'*catchall'     	: 'catchAll'
 		},
+		/*** Private router methods ***/
 		_loadHeader: function(){
 			var view = new stash.views.header().render();
 			$('header').html(view.el);
@@ -44,9 +45,6 @@
 		},
 		_loadPage: function(view){
 			$('#content').html(view.el);
-			//$(window).on('navigation', function(){
-				//$.fancybox.close();
-			//});
 		},
 		_login: function(){
 			var deferred = $.Deferred();
@@ -56,6 +54,7 @@
 				title : 'Login',
 				modal : true,
 				close: function(event, ui) {
+					if (!I.amLoggedIn()){
 					stash.helpers.navigate('/home');
 					$('<div/>', {
 						html: 'Sorry but you must be logged in to access this page.'
@@ -68,14 +67,17 @@
 								
 							}
 						}
-					});
+					});}
 				}
 			});
 			loginView.on('stash.login', function(data){
 				deferred.resolve(data);
+				loginBox.dialog('close');
 			});
 			return deferred.promise();
 		},
+
+
 		home: function(){
 			router._loadHeader();
 			var view = new stash.views.home().render();
@@ -120,15 +122,8 @@
 				var model = new M.Stash(null)
 				model.fetch({
 					success: function(result){
-						// var result = resultModel.toJSON();
-						if (result.has('stasherror')){
-							var errors = result.get('stasherror');
-
-						} else {
-							var view = new stash.views.currentStash({model:result}).render();
-							router._loadPage(view);
-						}
-						
+						var view = new stash.views.currentStash({model:result}).render();
+						router._loadPage(view);
 					},
 					error: function(model, error, options){
 						var errors = JSON.parse(error.responseText);
@@ -141,11 +136,13 @@
 						} else {
 							errorTxt = 'Oops, we could not load your stash.  Please try again later';
 						}
-						// var errorView = new stash.views.error({
-						// 	model: new stash.models.Error({message:errorTxt})
-						// }).render();
-						//router._loadPage(errorView);
-						stash.helpers.navigate('/account/income');
+						if (errors.expenseserror){
+							stash.helpers.navigate('/account/expenses');
+						} else if(errors.incomeserror){
+							stash.helpers.navigate('/account/income');
+						}
+						
+
 					}
 				});
 			} else {

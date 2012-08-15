@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = '192.168.10.2';
 $db['default']['username'] = 'thestash';
 $db['default']['password'] = 'dodgeram';
 $db['default']['database'] = 'TheStash';
@@ -56,7 +56,7 @@ $db['default']['dbdriver'] = 'mysql';
 //$db['default']['port']     = 8889;
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = FALSE;
+$db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
 $db['default']['cachedir'] = '';
 $db['default']['char_set'] = 'utf8';
