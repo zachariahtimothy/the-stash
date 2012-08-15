@@ -85,6 +85,10 @@
 		},
 		capitalizeFirstLetter: function(string){
 			return string.charAt(0).toUpperCase() + string.slice(1);
+		},
+		getMonthName: function(monthIdx){
+			var month=['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		 	return month[monthIdx];
 		}
 	});
 })();

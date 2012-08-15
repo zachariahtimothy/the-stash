@@ -8,51 +8,57 @@
 				<a href="stash/details">Details</a> | 
 				<a href="stash/addexpense">Add Expense</a>
 			</div>
-			<div class="today">
-				<h3>Today 7/26/2012</h3>
-				<ul class="label-column">
-					<li><span class="label">Cash Available</span></li>
-					<li><span class="label">Hurray, no bills today!</span></li>
-				</ul>
-				<ul>
-					<li><span class="dollar-sign">$</span></li>
-					</li><span class="dollar-sign"></span></li>
-				</ul>
-				<ul class="total-column">
-					<li>280</li>
-					<li>&nbsp;</li>
-				</ul>
-			</div>
-			<div class="week">
-				<h3>Week 7/22 (4)</h3>
-				<ul class="label-column">
-					<li><span class="label">Cash Available</span></li>
-					<li><span class="label">Hurray, no bills today!</span></li>
-				</ul>
-				<ul>
-					<li><span class="dollar-sign">$</span></li>
-					</li></li>
-				</ul>
-				<ul class="total-column">
-					<li>280</li>
-					<li>&nbsp;</li>
-				</ul>
-			</div>
-			<div class="month">
-				<h3>Month July (7)</h3>
-				<ul class="label-column">
-					<li><span class="label">Cash Available</span></li>
-					<li><span class="label">Hurray, no bills today!</span></li>
-				</ul>
-				<ul>
-					<li><span class="dollar-sign">$</span></li>
-					</li></li>
-				</ul>
-				<ul class="total-column">
-					<li>280</li>
-					<li>&nbsp;</li>
-				</ul>
-			</div>
+			{{#today}}
+				<div class="today">
+					<h3>Today {{today_text}}</h3>
+					<ul class="label-column">
+						<li><span class="label">Cash Available</span></li>
+						<li><span class="label">Hurray, no bills today!</span></li>
+					</ul>
+					<ul>
+						<li><span class="dollar-sign">$</span></li>
+						</li><span class="dollar-sign"></span></li>
+					</ul>
+					<ul class="total-column">
+						<li>{{income}}</li>
+						<li>{{expense}}</li>
+					</ul>
+				</div>
+			{{/today}}
+			{{#week}}
+				<div class="week">
+					<h3>Week {{week_text}}</h3>
+					<ul class="label-column">
+						<li><span class="label">Cash Available</span></li>
+						<li><span class="label">Hurray, no bills today!</span></li>
+					</ul>
+					<ul>
+						<li><span class="dollar-sign">$</span></li>
+						</li></li>
+					</ul>
+					<ul class="total-column">
+						<li>{{income}}</li>
+						<li>{{expense}}</li>
+					</ul>
+				</div>
+			{{/week}}
+			{{#month}}
+				<div class="month">
+					<h3>Month {{month_text}}</h3>
+					<ul class="label-column">
+						<li><span class="label">Cash Available</span></li>
+						<li><span class="label"></span></li>
+					</ul>
+					<ul>
+						<li><span class="dollar-sign">$</span></li>
+						</li><span class="dollar-sign">$</span></li>
+					</ul>
+					<ul class="total-column">
+						<li>{{income}}</li>
+						<li>{{expense}}</li>
+					</ul>
+				</div>
+			{{/month}}
 		</div>
 		<div class="column-right">
 			<div class="minibox">
