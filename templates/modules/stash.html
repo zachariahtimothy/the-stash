@@ -1,12 +1,12 @@
 <script type="text/html" id="currentstash-tpl">
 	<div id="currentStash">
 		<h2 class="headerbar">
-			Current Stash <span class="menu"><a href="/account/expenses">Monthly Expenses</a> | <a href="/account">Account</a></span>
+			Current Stash <span class="menu"><a href="/account/expenses" title="Manage your monthly expenses">Monthly Expenses</a> | <a href="/account" title="Manage your income, expenses">Account</a></span>
 		</h2>
 		<div class="column-left">
 			<div class="submenu">
-				<a href="stash/details">Details</a> | 
-				<a href="stash/addexpense">Add Expense</a>
+				<a href="stash/details" class="details">Details</a> | 
+				<a href="stash/addexpense" class="expenses">Add Expense</a>
 			</div>
 			{{#today}}
 				<div class="today">
@@ -68,9 +68,49 @@
 			<img src="../images/doing_great.jpg" alt="Doing Great">
 			<div class="minibox">
 				<h4>Stay the Course</h4>
-				<p>Nothing good comes easy.  Slow and steady wins the race.</p>
+				<p>Nothing good comes easy. Slow and steady wins the race.</p>
 			</div>
 			<img src="../images/stay_the_course.jpg" alt="Stay the course">
 		</div>
+	</div>
+</script>
+
+<script type="text/html" id="stash-monthly-expenses-tpl">
+	<div id="stashMonthlyExpenses">
+		<div class="column-left">
+			<h2>Expenses</h2>
+			<ul id="list-items-container"></ul>
+		</div>
+		<div class="column-right">
+			<h2>Add Expense</h2>
+			<form>
+				<p>	
+					<label>Amount:</label>
+					<input type="text" name="amount">
+					<select name="category" required>
+						<option value="0">Category...</option>
+						<option value="add">*Add a Category</option>
+						{{#domain}}
+							{{#categories}}
+								<option value="{{id}}">{{name}}</option>
+							{{/categories}}
+						{{/domain}}
+					</select>
+				</p>
+				<p>	
+					<label>Date:</label>
+					<input type="text" name="amount">
+				</p>
+				<p>
+					<button type="submit">Submit</button>
+				</p>
+			</form>
+		</div>
+	</div>
+</script>
+
+<script type="text/html" id="stash-detail-tpl">
+	<div id="stashDetail">
+		
 	</div>
 </script>

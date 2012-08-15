@@ -40,23 +40,25 @@
 			initialize: function(){
 				var self = this;
 				
-				stash.domain.fetch().done(function(domainModel){
-					var domainData = domainModel.toJSON();
-					self.domain.frequencies = domainData.frequencies;
-					self.domain.categories = _.filter(domainData.categories, function(category){ 
-						if (self.options.section === 'income'){
-							return category.type==='income';
-						} else if (self.options.section === 'expenses'){
-							return category.type==='expenses';
-						}
+				if (self.options.section === 'income' || self.options.section == 'expenses'){
+					stash.domain.fetch().done(function(domainModel){
+						var domainData = domainModel.toJSON();
+						self.domain.frequencies = domainData.frequencies;
+						self.domain.categories = _.filter(domainData.categories, function(category){ 
+							if (self.options.section === 'income'){
+								return category.type==='income';
+							} else if (self.options.section === 'expenses'){
+								return category.type==='expenses';
+							}
+						});
+						self.render();
+					}).fail(function(error){
+						var p = this;
+
 					});
-					self.render();
-				}).fail(function(error){
-					var p = this;
 
-				});
-
-				self.getListItems(self.options.section);
+					self.getListItems(self.options.section);
+				}
 
 				return self;
 			},
@@ -64,7 +66,8 @@
 				var self = this;
 				self.data = {
 					section: self.options.section,
-					domain: self.domain
+					domain: self.domain,
+					me: I.getMe().toJSON()
 				};
 				self.data['section_' + self.options.section] = true;
 

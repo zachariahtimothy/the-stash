@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '192.168.10.2';
+$db['default']['hostname'] = 'forwardmotionconsulting.com';
 $db['default']['username'] = 'thestash';
 $db['default']['password'] = 'dodgeram';
 $db['default']['database'] = 'TheStash';

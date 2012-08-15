@@ -108,10 +108,32 @@
 
 <script type="text/html" id="account-details-tpl">
 	<div id="account-details" class="account-section details {{#section_details}}active{{/section_details}}">
-		<h3><a href="/account/details">Details</a></h3>
-		<div class="container">
-			<p>stuff</p>
-		</div>
+		{{#me}}
+			<h3><a href="/account/details">Details</a></h3>
+			<div class="container">
+				<div class="collumn-left">
+					<form>
+						<input type="hidden" name="id" value="{{id}}">
+						<p>
+							<label>Name:</label>
+							<input type="text" name="name" value="{{name}}">
+						</p>
+						<p>
+							<label>Email:</label>
+							<input type="email" name="email" value="{{email}}">
+						</p>
+						
+						<p>
+							<label></label>
+							<button type="submit">Save</button>
+						</p>
+					</form>
+				</div>
+				<div class="column-right">
+
+				</div>
+			</div>
+		{{/me}}
 	</div>
 </script>
 
@@ -121,7 +143,7 @@
 		<input type="hidden" name="type" value="{{type}}">
 		<p>
 			<label>Name:</label><br />
-			<input type="text" name="name">
+			<input type="text" name="name" value="{{name}}">
 		</p>
 		<p>
 			<button type="submit">Save</button>
