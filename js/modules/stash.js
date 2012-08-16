@@ -18,7 +18,7 @@
 				var dayOfWeek = today.getDay();
 				var month = today.getMonth()+1;
 				var formatMonth = (month < 10 ? '0' + month : month);
-				var todayFormatted = today.getFullYear()  + '-'+ (month < 10 ? '0' + month : month) + '-' + today.getDate() ;
+				var todayFormatted = today.getFullYear()  + '-'+ (month < 10 ? '0' + month : month) + '-' + today.getDate();
 
 				self.data = {
 					today_text:  month+ '/'+ today.getDate() + '/' +  today.getFullYear(),
@@ -46,9 +46,15 @@
 							monthLeft += parseFloat(expense.amount);
 						}
 					});
-					self.data.today.expense = todaysLeft;
-					self.data.week.expense = weeksLeft;
-					self.data.month.expense = monthLeft;
+					self.data.today.expense = {
+						amount_left: todaysLeft<0 ? todaysLeft*-1 : todaysLeft
+					};
+					self.data.week.expense = {
+						amount_left: weeksLeft
+					};
+					self.data.month.expense ={
+						amount_left:monthLeft
+					};
 				})(stashObj.expenses);
 
 				(function calculateIncome(incomes){
@@ -67,9 +73,22 @@
 							monthLeft += parseFloat(income.amount);
 						}
 					});
-					self.data.today.income = todaysLeft-self.data.today.expense;
-					self.data.week.income = weeksLeft-self.data.week.expense;
-					self.data.month.income = monthLeft-self.data.month.expense;
+					var amtLeft;
+					amtLeft = todaysLeft-self.data.today.expense.amount_left;
+					self.data.today.income ={
+						amount_left: amtLeft<0 ? amtLeft*-1 : amtLeft,
+						is_negative: amtLeft<0
+					};
+					amtLeft = weeksLeft-self.data.week.expense.amount_left;
+					self.data.week.income = {
+						amount_left: amtLeft<0 ? amtLeft*-1 : amtLeft,
+						is_negative: amtLeft<0
+					}
+					amtLeft = monthLeft-self.data.month.expense.amount_left;
+					self.data.month.income = {
+						amount_left: amtLeft<0 ? amtLeft*-1 : amtLeft,
+						is_negative: amtLeft<0
+					};
 				})(stashObj.incomes);
 
 				self.$el.html(ich['currentstash-tpl'](self.data));
@@ -97,24 +116,21 @@
 				var view = new V.stashDetail({model: self.model}).render();
 				view.$el.dialog({
 					modal: true,
-					title: H.getMonthName(self.today.getMonth()) + ' Stash Details'
+					title: H.getMonthName(self.today.getMonth()) + ' Stash Details',
+					width:700
 				});
 			}
 		})
 		,
 		stashMonthlyExpenses: Backbone.View.extend({
+			events: {
+				'submit form' : 'onFormSubmit',
+				'change select[name="category"]'  : 'onSelectChange'
+			},
 			initialize: function(){
 				var self = this;
-				new stash.collections.Expenses()
-					.fetch({
-						success: function(result){
-							self.trigger('listUpdated', result);
-						},
-						error:function(model, error){
-
-						}
-					});
 				
+				self.domain = {};
 				stash.domain.fetch().done(function(domainModel){
 					var domainData = domainModel.toJSON();
 					self.domain.frequencies = domainData.frequencies;
@@ -128,10 +144,102 @@
 			},
 			render: function(){
 				var self = this;
+				var today = new Date();
+				var month = today.getMonth()+1;
+				var todayFormatted = today.getFullYear()  + '-'+ (month < 10 ? '0' + month : month) + '-' + today.getDate();
 				self.data = {
-
+					domain : self.domain || {},
+					today: todayFormatted
 				};
+				
 				self.$el.html(ich['stash-monthly-expenses-tpl'](self.data));
+
+				return self;
+			},
+			onFormSubmit: function(ev){
+				ev.preventDefault();
+				var self = this;
+				var form = $(ev.currentTarget);
+				new stash.models.Expense().save(form.serializeObject(), {
+					success: function(result){
+						var p = result;
+						self.render();
+					},
+					error: function(model, error){
+						//TODO: Handle error
+					}
+				});
+				return false;
+			},
+			onSelectChange: function(ev){
+				var select =  $(ev.currentTarget);
+				var self = this;
+				var isAddNew = select.val() === 'add';
+				if (isAddNew){
+					var view = new stash.views.accountAddDomainData({type: self.options.section}).render();
+					view.$el.dialog({
+						modal: true,
+						title: 'Add a ' + stash.helpers.capitalizeFirstLetter(select.attr('name'))
+					});
+
+					view.on('stash:submit', function(formData){
+						if (select.attr('name') === 'category'){
+							new stash.models.Category().save(formData, {
+								success: function(result){
+									select.append('<option value="'+result.get('id')+'" selected>'+result.get('name')+'</option>');
+									view.$el.dialog('destroy');
+								},
+								error: function(model, error){
+									//TODO: Add error handling
+								}
+							});
+						} 
+					});
+
+				} else {
+					return false;
+				}
+			}
+		})
+		,
+		stashDetail:  Backbone.View.extend({
+			events: {
+				'submit form' : 'onFormSubmit'
+			},
+			initialize: function(){
+				var self = this;
+				new stash.collections.Expenses()
+					.fetch({
+						success: function(result){
+							self.trigger('listUpdated', result);
+						},
+						error:function(model, error){
+
+						}
+					});
+				self.domain = {};
+				stash.domain.fetch().done(function(domainModel){
+					var domainData = domainModel.toJSON();
+					self.domain.frequencies = domainData.frequencies;
+					self.domain.categories = _.filter(domainData.categories, function(category){ 
+						return category.type==='expenses';
+					});
+					self.render();
+				});
+
+				return self;
+			},
+			render: function(ev){
+				var self = this;
+				var today = new Date();
+				var month = today.getMonth()+1;
+				var todayFormatted = today.getFullYear()  + '-'+ (month < 10 ? '0' + month : month) + '-' + today.getDate();
+				self.data = {
+					domain: self.domain || {},
+					today: todayFormatted
+				};
+				var view = new stash.views.stashMonthlyExpenses().render();
+				self.$el.html(ich['stash-detail-tpl'](self.data)).find('#addExpensesContainer').html(view.el);
 
 				self.on('listUpdated', function(result){
 					var view = new stash.views.commonlistItem({collection: result}).render();
@@ -142,18 +250,23 @@
 					
 				});
 
-				return self;
-			}
-		})
-		,
-		stashDetail:  Backbone.View.extend({
-			render: function(ev){
-				var self = this;
-				self.data = {
-
-				};
-				self.$el.html(ich['stash-detail-tpl'](self.data));
 				return self;	
+			},
+			onFormSubmit: function(ev){
+				ev.preventDefault();
+				var self = this;
+				var form = $(ev.currentTarget);
+				new stash.models.Expense().save(form.serializeObject(), {
+					success: function(result){
+						var p = result;
+						self.render();
+					},
+					error: function(model, error){
+						//TODO: Handle error
+					}
+				});
+
+				return false;
 			}
 		})
 	});

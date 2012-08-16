@@ -17,11 +17,11 @@
 					</ul>
 					<ul>
 						<li><span class="dollar-sign">$</span></li>
-						</li><span class="dollar-sign"></span></li>
+						<li><span class="dollar-sign">$</span></li>
 					</ul>
 					<ul class="total-column">
-						<li>{{income}}</li>
-						<li>{{expense}}</li>
+						<li {{#income.is_negative}}class="negative"{{/income.is_negative}}>{{income.amount_left}}</li>
+						<li class="expenseAmt">{{expense.amount_left}}</li>
 					</ul>
 				</div>
 			{{/today}}
@@ -34,11 +34,11 @@
 					</ul>
 					<ul>
 						<li><span class="dollar-sign">$</span></li>
-						</li></li>
+						<li><span class="dollar-sign">$</span></li>
 					</ul>
 					<ul class="total-column">
-						<li>{{income}}</li>
-						<li>{{expense}}</li>
+						<li {{#income.is_negative}}class="negative"{{/income.is_negative}}>{{income.amount_left}}</li>
+						<li class="expenseAmt">{{expense.amount_left}}</li>
 					</ul>
 				</div>
 			{{/week}}
@@ -51,11 +51,11 @@
 					</ul>
 					<ul>
 						<li><span class="dollar-sign">$</span></li>
-						</li><span class="dollar-sign">$</span></li>
+						<li><span class="dollar-sign">$</span></li>
 					</ul>
 					<ul class="total-column">
-						<li>{{income}}</li>
-						<li>{{expense}}</li>
+						<li {{#income.is_negative}}class="negative"{{/income.is_negative}}>{{income.amount_left}}</li>
+						<li class="expenseAmt">{{expense.amount_left}}</li>
 					</ul>
 				</div>
 			{{/month}}
@@ -77,40 +77,42 @@
 
 <script type="text/html" id="stash-monthly-expenses-tpl">
 	<div id="stashMonthlyExpenses">
-		<div class="column-left">
-			<h2>Expenses</h2>
-			<ul id="list-items-container"></ul>
-		</div>
-		<div class="column-right">
-			<h2>Add Expense</h2>
-			<form>
-				<p>	
-					<label>Amount:</label>
-					<input type="text" name="amount">
-					<select name="category" required>
-						<option value="0">Category...</option>
-						<option value="add">*Add a Category</option>
-						{{#domain}}
-							{{#categories}}
-								<option value="{{id}}">{{name}}</option>
-							{{/categories}}
-						{{/domain}}
-					</select>
-				</p>
-				<p>	
-					<label>Date:</label>
-					<input type="text" name="amount">
-				</p>
-				<p>
-					<button type="submit">Submit</button>
-				</p>
-			</form>
-		</div>
+		<h2>Add Expense</h2>
+		<form>
+			<input type="hidden" name="type" value="expenses">
+			<input type="hidden" name="date" value="{{today}}">
+			<p>	
+				<label>Amount:</label>
+				<input type="text" name="amount">
+			</p>
+			<p>
+				<select name="category" required>
+					<option value="0">Category...</option>
+					<option value="add">*Add a Category</option>
+					{{#domain}}
+						{{#categories}}
+							<option value="{{id}}">{{name}}</option>
+						{{/categories}}
+					{{/domain}}
+				</select>
+			</p>
+			<p class="textarea">
+				<label>Note:</label>
+				<textarea name="note"></textarea>
+			</p>
+			<p>
+				<button type="submit">Submit</button>
+			</p>
+		</form>
 	</div>
 </script>
 
 <script type="text/html" id="stash-detail-tpl">
 	<div id="stashDetail">
-		
+		<div class="column-left expenses">
+			<h2>Expenses</h2>
+			<ul id="list-items-container"></ul>
+		</div>
+		<div id="addExpensesContainer" class="column-right"></div>
 	</div>
 </script>

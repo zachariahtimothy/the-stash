@@ -15,19 +15,7 @@
 	background: #dedede;
 	padding:10px;
 }
-#account #list-items-container{
-	height:250px;
-	overflow-y: scroll;
-	overflow-x:hidden;
-}
-#account #list-items-container li{
-	padding:8px 5px;
-}
-#account #list-items-container li:hover{
-	background: #ffffff;
-	border:1px solid #ddd;
-	padding:7px 4px;
-}
+
 
 #account .headerbar{
 	margin-bottom:30px;

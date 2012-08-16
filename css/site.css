@@ -192,6 +192,21 @@ a[href].button:hover{
 }
 
 
+#list-items-container{
+	height:250px;
+	overflow-y: scroll;
+	overflow-x:hidden;
+}
+#list-items-container li{
+	padding:8px 5px;
+	white-space: nowrap;
+}
+#list-items-container li:hover{
+	background: #ffffff;
+	border:1px solid #ddd;
+	padding:7px 4px;
+}
+
 /*** Form Styles ***/
 input, textarea , input[type="checkbox"]{ 
 	padding: 9px;

@@ -27,6 +27,12 @@
 	float:right;
 	margin:10px 0;
 }
+#currentStash ul li{
+	line-height: 25px;
+}
+#currentStash ul li.negative{
+	color:red;
+}
 #currentStash .column-left ul{
 	display:inline-block;
 	padding:10px;
@@ -41,10 +47,17 @@
 	margin-left:20px;
 }
 #currentStash .label-column li{
-	position:relative;
+	width: 170px;
 }
 #currentStash .label-column li .label{
 	display:inline-block;
+}
+#currentStash .total-column li{
+	width:50px;
+	text-align: center;
+}
+#currentStash .total-column li.expenseAmt{
+	color:#999;
 }
 #currentStash .total-column{
 	background:#e6e6e6;
@@ -55,5 +68,28 @@
 }
 #currentStash .dollar-sign{
 	color:#b5b5b5;
+}
+
+
+#stashDetail{
 
 }
+#stashDetail > .column-left,
+#stashDetail > .column-right{
+	width:300px;
+}
+#stashDetail .column-right{
+	margin-left:10px;
+}
+#stashDetail .column-left.expenses{
+	background: #dedede;
+	padding:5px;
+}
+#stashMonthlyExpenses form label{
+	text-align:left;
+}
+#stashMonthlyExpenses form textarea{
+	width:200px;
+	height:75px;
+}
+

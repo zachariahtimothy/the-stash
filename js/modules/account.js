@@ -1,4 +1,5 @@
 (function(){
+	var I = stash.identity;
 	stash.helpers.extendGlobal('stash.views', {
 		account: Backbone.View.extend({
 			
@@ -34,7 +35,7 @@
 				'change select[name="frequency"]' : 'onSelectChange',
 				'change select[name="category"]'  : 'onSelectChange',
 				'submit #account-income form'     : 'onIncomeSubmit',
-				'submit #account-expenses form'    : 'onExpenseSubmit',
+				'submit #account-expenses form'   : 'onExpenseSubmit',
 				'submit #account-details form'    : 'onDetailsSubmit'
 			},
 			initialize: function(){
