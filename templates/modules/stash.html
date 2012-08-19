@@ -13,7 +13,12 @@
 					<h3>Today {{today_text}}</h3>
 					<ul class="label-column">
 						<li><span class="label">Cash Available</span></li>
-						<li><span class="label">Hurray, no bills today!</span></li>
+						<li>
+							<span class="label">
+								{{#expense.has_expenses}}Remaining Expenses{{/expense.has_expenses}}
+								{{^expense.has_expenses}}Hurray, no bills today!{{/expense.has_expenses}}
+							</span>
+						</li>
 					</ul>
 					<ul>
 						<li><span class="dollar-sign">$</span></li>
@@ -30,7 +35,12 @@
 					<h3>Week {{week_text}}</h3>
 					<ul class="label-column">
 						<li><span class="label">Cash Available</span></li>
-						<li><span class="label">Hurray, no bills today!</span></li>
+						<li>
+							<span class="label">
+								{{#expense.has_expenses}}Remaining Expenses{{/expense.has_expenses}}
+								{{^expense.has_expenses}}Hurray, no bills this week!{{/expense.has_expenses}}
+							</span>
+						</li>
 					</ul>
 					<ul>
 						<li><span class="dollar-sign">$</span></li>
@@ -47,7 +57,12 @@
 					<h3>Month {{month_text}}</h3>
 					<ul class="label-column">
 						<li><span class="label">Cash Available</span></li>
-						<li><span class="label"></span></li>
+						<li>
+							<span class="label">
+								{{#expense.has_expenses}}Remaining Expenses{{/expense.has_expenses}}
+								{{^expense.has_expenses}}Hurray, no bills left!{{/expense.has_expenses}}
+							</span>
+						</li>
 					</ul>
 					<ul>
 						<li><span class="dollar-sign">$</span></li>

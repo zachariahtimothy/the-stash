@@ -89,6 +89,20 @@
 		getMonthName: function(monthIdx){
 			var month=['January','February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		 	return month[monthIdx];
+		},
+		errorDialog: function(args){
+			var dialog = $('<div/>', {
+				html: args.html
+			}).dialog({
+				modal:true, 
+				title: args.title || 'Error'
+			});
+			if (args.timeout){
+				setTimeout(function(){
+					dialog.dialog('destroy')
+				}, args.timeout);
+			}
+			return dialog;
 		}
 	});
 })();

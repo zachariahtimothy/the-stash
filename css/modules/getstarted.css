@@ -11,3 +11,8 @@
 	max-height: 145px;
 	border:2px solid #dadada;
 }
+
+#getstarted .ui-state-highlight{
+	padding: 10px;
+	margin: 10px 0;
+}

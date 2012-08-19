@@ -1,8 +1,14 @@
 <script type="text/html" id="account-tpl">
 	<div id="account">
 		<h2 class="headerbar">
-			Manage Account <span class="menu"><a href="/account/expenses">Monthly Expenses</a> | <a href="/stash">Current Stash</a></span>
+			Manage Account <span class="menu"><a href="/account/expenses">Monthly Expenses</a> | <a href="/stash" title="Go to your current stash">Current Stash</a></span>
 		</h2>
+		{{#message}}
+			<div id="messageBox" class="ui-state-highlight ui-corner-all">
+				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+				{{message}}
+			</div>
+		{{/message}}
 		<div id="expenses-container">{{>account-expenses-tpl}}</div>
 		<div id="income-container">{{>account-income-tpl}}</div>
 		<div id="details-container">{{>account-details-tpl}}</div>

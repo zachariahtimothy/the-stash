@@ -1,6 +1,12 @@
 <script type="text/html" id="getstarted-tpl">
 	<div id="getstarted">
 		<h2 class="headerbar">Get Started with your Stash</h2>
+		{{#amLoggedIn}}
+			<div class="ui-state-highlight ui-corner-all">
+				<span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+				You are logged in, please log out before creating a new account.
+			</div>
+		{{/amLoggedIn}}
 		<p class="description">Congratulations! You are on your way to stop overspending and climb your way out of debt.</p>
 		<div class="column-left">
 			

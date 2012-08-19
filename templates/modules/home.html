@@ -1,6 +1,6 @@
 <script type="text/html" id="home-tpl">
 	<div id="home">
-		<h2 class="headerbar">You need out of debt...Let us help</h2>
+		<h2 class="headerbar">You need out of debt...Let us help {{#am_logged_in}}<span class="menu"><a href="/account/expenses">Monthly Expenses</a> | <a href="/stash" title="Go to your current stash">Current Stash</a>{{/am_logged_in}}</h2>
 		<div class="pagebanner">
 			<img src="../images/moneybanner.jpg" alt="money image">
 			<p>

@@ -47,6 +47,8 @@ class Users extends CI_Controller {
      		}
     		
     		
+    	} else if ($_SERVER['REQUEST_METHOD'] == 'PUT'){
+    		$data['json'] = $this->update();
     	}
     	$this->load->view('json_view', $data);	
     }
@@ -152,6 +154,18 @@ class Users extends CI_Controller {
 	 		$data['json'] = array('message' => 'No user');
 	 	}
 	 	return $data;
+	}
+
+	private function update(){
+		$data = '';
+		$request_body = file_get_contents('php://input');
+    	$postData = json_decode($request_body);
+    	$this->session->set_userdata(array('theStashUser' => $row));
+    	$this->db->where('id', $postData->id);
+    	unset($postData->id);
+    	$updateGood = $this->db->update('Users', $postData);
+    	$data['message'] = $updateGood;
+    	return $data;
 	}
 	
 }

@@ -47,13 +47,16 @@
 						}
 					});
 					self.data.today.expense = {
-						amount_left: todaysLeft<0 ? todaysLeft*-1 : todaysLeft
+						amount_left: todaysLeft<0 ? todaysLeft*-1 : todaysLeft,
+						has_expenses: todaysLeft>0
 					};
 					self.data.week.expense = {
-						amount_left: weeksLeft
+						amount_left: weeksLeft,
+						has_expenses: weeksLeft>0
 					};
 					self.data.month.expense ={
-						amount_left:monthLeft
+						amount_left:monthLeft,
+						has_expenses: monthLeft>0
 					};
 				})(stashObj.expenses);
 
@@ -176,7 +179,7 @@
 				var self = this;
 				var isAddNew = select.val() === 'add';
 				if (isAddNew){
-					var view = new stash.views.accountAddDomainData({type: self.options.section}).render();
+					var view = new stash.views.accountAddDomainData({type: 'expenses'}).render();
 					view.$el.dialog({
 						modal: true,
 						title: 'Add a ' + stash.helpers.capitalizeFirstLetter(select.attr('name'))
@@ -258,8 +261,16 @@
 				var form = $(ev.currentTarget);
 				new stash.models.Expense().save(form.serializeObject(), {
 					success: function(result){
-						var p = result;
 						self.render();
+						new stash.collections.Expenses()
+						.fetch({
+							success: function(result){
+								self.trigger('listUpdated', result);
+							},
+							error:function(model, error){
+
+							}
+						});
 					},
 					error: function(model, error){
 						//TODO: Handle error

@@ -1,5 +1,7 @@
 (function(){
+	var H = stash.helpers;
 	var I = stash.identity;
+
 	stash.helpers.extendGlobal('stash.views', {
 		account: Backbone.View.extend({
 			
@@ -13,7 +15,8 @@
 					self.trigger('listUpdated', result);
 				};
 				var error = function(model, error){
-
+					self.message = "Please setup your account expenses and income to get started with The Stash.";
+					self.render();
 				};
 				if (section === 'expenses'){
 					new stash.collections.Expenses()
@@ -32,11 +35,13 @@
 			},
 
 			events: {
-				'change select[name="frequency"]' : 'onSelectChange',
-				'change select[name="category"]'  : 'onSelectChange',
-				'submit #account-income form'     : 'onIncomeSubmit',
-				'submit #account-expenses form'   : 'onExpenseSubmit',
-				'submit #account-details form'    : 'onDetailsSubmit'
+				'change select[name="frequency"]' 			 : 'onSelectChange',
+				'change select[name="category"]'  			 : 'onSelectChange',
+				'submit #account-income form'    			 : 'onIncomeSubmit',
+				'submit #account-expenses form'   			 : 'onExpenseSubmit',
+				'submit #account-details form'    			 : 'onDetailsSubmit',
+				'click #list-items-container a[href].edit'   : 'onEditClick',
+				'click #list-items-container a[href].delete' : 'onDeleteClick'
 			},
 			initialize: function(){
 				var self = this;
@@ -68,7 +73,8 @@
 				self.data = {
 					section: self.options.section,
 					domain: self.domain,
-					me: I.getMe().toJSON()
+					me: I.getMe().toJSON(),
+					message: self.message || null
 				};
 				self.data['section_' + self.options.section] = true;
 
@@ -80,10 +86,10 @@
 				.find('input[name="date"]').datepicker({"dateFormat":'yy-mm-dd'});
 				
 				self.on('listUpdated', function(result){
-					var view = new stash.views.commonlistItem({collection: result}).render();
+					self.listView = new stash.views.commonlistItem({collection: result}).render();
 					// Use set timeout because payload returns before page render complete;
 					setTimeout(function(){
-						self.$('#list-items-container').html(view.el);
+						self.$('#list-items-container').html(self.listView.el);
 					}, 10)
 					
 				});
@@ -137,7 +143,6 @@
 				var data = form.serializeObject();
 				new stash.models.Expense().save(data, {
 					success: function(result){
-						var p = result;
 						self.getListItems('expenses');
 					},
 					error: function(model, error){
@@ -168,16 +173,42 @@
 				var self = this;
 				var form = $(ev.currentTarget);
 				var data = form.serializeObject();
-				new stash.models.User().save(data, {
+				var me = I.getMe();
+				me.set(data);
+
+				me.save(data, {
 					success: function(result){
 						var p = result;
 						self.render();
 					},
 					error: function(model, error){
-						//TODO: Handle error
+						H.errorDialog({html: H.getBackboneError(error).message});
 					}
 				})
 				return false;
+			},
+			onEditClick: function(ev){
+				ev.preventDefault();
+
+			},
+			onDeleteClick: function(ev){
+				ev.preventDefault();
+				var self = this;
+				var link = $(ev.currentTarget);
+				var id = link.parents('li').data('id');
+				var itemToDelete = self.listView.collection.find(function(item){
+					return item.id == id;
+				});
+				self.listView.collection.remove(itemToDelete);
+				// itemToDelete.destroy({
+				// 	success: function(result){
+
+				// 	},
+				// 	error: function(model, error){
+
+				// 		H.errorDialog({html: H.getBackboneError(error).message }});
+				// 	}
+				// });
 			}
 		}),
 		accountAddDomainData: Backbone.View.extend({

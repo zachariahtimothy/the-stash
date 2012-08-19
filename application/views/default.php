@@ -44,9 +44,19 @@
 		<div id="fb-root"></div>
 
 		<script>
+			var stash = stash || {};
+			stash.settings = {
+				apiUrl : '/thestash/index.php/api/',
+				googleAnalytics: 'UA-34145346-1',
+				facebookId: '354627471275289'
+			};
+
+			//Bootstrap this bad boy.
+			<?php if (isset($user)){ echo 'var myself = '.$user.';'; } ?>
+
 			window.fbAsyncInit = function() {
           		FB.init({
-	            appId      : '354627471275289', // App ID
+	            appId      : stash.settings.facebookId, // App ID
 	            channelUrl : '//'+window.location.hostname+'/channel.html', // Channel File
 	            status     : true, // check login status
 	            cookie     : true, // enable cookies to allow the server to access the session
@@ -54,7 +64,7 @@
 	          });
 	          // Additional initialization code here
 	        };
-	        // Load the SDK Asynchronously
+	        // Load the FB SDK Asynchronously
 	        (function(d){
 	           var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
 	           if (d.getElementById(id)) {return;}
@@ -63,13 +73,17 @@
 	           ref.parentNode.insertBefore(js, ref);
 	         }(document));
 
-			var stash = {};
-			//Bootstrap this bad boy.
-			<?php 
-			 if (isset($user)){
-			 	echo 'var myself = '.$user.';';
-			 }
-			?>
+	        /*** Google Analytics ***/
+		  	var _gaq = _gaq || [];
+  			_gaq.push(['_setAccount', stash.settings.googleAnalytics]);
+  			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+
 		</script>
 		<script src="../js/lib/json2.js"></script>
 		<script src="../js/lib/jquery.js"></script>
@@ -78,12 +92,6 @@
 		<script src="../js/lib/backbone.js"></script>
 		<script src="../js/lib/ICanHaz.js"></script>
 
-		<script>
-			var stash = stash || {};
-			stash.settings = {
-				apiUrl : '/TheStash/index.php/api/'
-			}
-		</script>
 		<script src="../js/helpers.js"></script>
 		<script src="../js/models.js"></script>
 		<script src="../js/collections.js"></script>

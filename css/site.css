@@ -118,7 +118,10 @@ a[href].button:hover{
 .headerbar a[href]{
 	color:#999999;
 }
-
+#messageBox{
+	padding: 15px;
+	margin-bottom: 30px
+}
 .pagebanner{
 	position:relative;
 	top:-4px;

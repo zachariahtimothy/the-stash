@@ -180,7 +180,7 @@
 			router._loadFooter();
 
 		},
-		catchAll: function(a, b, c){
+		catchAll: function(){
 			router.home();
 		}
 	});

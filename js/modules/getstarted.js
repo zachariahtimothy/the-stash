@@ -1,5 +1,7 @@
 (function(){
 	var I = stash.identity;
+	var H = stash.helpers;
+
 	stash.helpers.extendGlobal('stash.views', {
 		getStarted: Backbone.View.extend({
 			events:{
@@ -10,7 +12,8 @@
 				var self = this;
 				self.data = {
 					facebookId: self.facebookId || null,
-					name: self.name || ''
+					name: self.name || '',
+					amLoggedIn: I.amLoggedIn()
 				};
 				self.$el.html(ich['getstarted-tpl'](self.data));
 
@@ -43,6 +46,7 @@
 				ev.preventDefault();
 				var self = this;
 				var form = $(ev.currentTarget);
+				form.find('["type="submit"]').attr('disabled', 'disabled');
 				var data = form.serializeObject();
 				new stash.models.User().save(data, {
 					success: function(model, result){
@@ -50,9 +54,10 @@
 						.done(function(result){
 							stash.helpers.navigate('/stash');
 						});
+						form.find('["type="submit"]').attr('disabled', 'disabled');
 					},
 					error: function(model, error){
-
+						form.find('["type="submit"]').attr('disabled', '');
 					}
 				});
 				return false;

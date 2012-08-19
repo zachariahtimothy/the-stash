@@ -11,6 +11,8 @@ class Expenses extends CI_Controller {
 
     public function index(){
     	$data = array();
+        $id = $this->input->get('id');
+
     	if ($_SERVER['REQUEST_METHOD'] == "GET") {
     		$expenses = $this->get();
     		if (isset($expenses['error'])){
@@ -19,18 +21,25 @@ class Expenses extends CI_Controller {
     		$data['json'] = $expenses;
 
     	} else if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    	 	 $expense = $this->post();
-    		 if (!$expense){
+    	 	$expense = $this->post();
+    		if (!$expense){
     		 	$data['status'] = 404;
-    		 }
+    		}
     		 $data['json'] = $expense;
-    	}
+    	} else if ($_SERVER['REQUEST_METHOD'] == "DELETE" && $id > 0){
+           
+            $result = $this->delete($id);
+            if (isset($result['error'])){
+                 $data['status'] = 400;
+            } 
+            $data['json'] =  $result;
+        }
     	
 		
 	 	$this->load->view('json_view', $data);		
     }
 
-    private function get(){
+    private function get($id = 0){
     	$data = array();
     	$query = $this->db->query('
 				SELECT e.`id`, e.`amount`,e.`frequencyId`, c.`name`, ed.`date`
@@ -39,7 +48,7 @@ class Expenses extends CI_Controller {
 				INNER JOIN ExpenseDates ed on e.`id` = ed.`expenseId`
 				WHERE e.`userId` = ?
 				', array($this->_user['id']));
-
+//TODO: Add get by id to query
     	if ($query->num_rows() > 0) {	
 	 		$row = $query->result_array();
 			$data = $row;
@@ -74,5 +83,12 @@ class Expenses extends CI_Controller {
 		}
 		
 		return $data;
+    }
+
+    private function delete($id){
+        $data = array();;
+        $data['expenseDates'] = $this->db->delete('expensedates', array('expenseId' => $id));
+        $data['expenses'] = $this->db->delete('expenses', array('id' => $id));
+        return $data;
     }
 }

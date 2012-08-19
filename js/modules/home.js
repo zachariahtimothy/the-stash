@@ -1,4 +1,5 @@
 (function(){
+	var I = stash.identity;
 	stash.helpers.extendGlobal('stash.views', {
 		home: Backbone.View.extend({
 			events:{
@@ -7,7 +8,10 @@
 			},
 			render: function(){
 				var self = this;
-				self.$el.html(ich['home-tpl']);
+				self.data = {
+					am_logged_in: I.amLoggedIn()
+				}
+				self.$el.html(ich['home-tpl'](self.data));
 				return self;
 			},
 

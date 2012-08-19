@@ -10,10 +10,14 @@
 			
 		}),
 		Income: Backbone.Model.extend({
-			url: stash.settings.apiUrl + 'incomes'
+			url: function(){
+				return stash.settings.apiUrl + 'incomes' + (this.id ? '/' + this.id : '');
+			}
 		}),
 		Expense: Backbone.Model.extend({
-			url: stash.settings.apiUrl + 'expenses'
+			url: function(){
+				return stash.settings.apiUrl + 'expenses' + (this.id ? '?id=' + this.id : '');
+			}
 		}),
 		Frequency: Backbone.Model.extend({
 			url: stash.settings.apiUrl + 'domain/frequency'
