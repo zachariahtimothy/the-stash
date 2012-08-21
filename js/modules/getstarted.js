@@ -46,7 +46,7 @@
 				ev.preventDefault();
 				var self = this;
 				var form = $(ev.currentTarget);
-				form.find('["type="submit"]').attr('disabled', 'disabled');
+				form.find('[type="submit"]').attr('disabled', 'disabled');
 				var data = form.serializeObject();
 				new stash.models.User().save(data, {
 					success: function(model, result){
@@ -54,10 +54,10 @@
 						.done(function(result){
 							stash.helpers.navigate('/stash');
 						});
-						form.find('["type="submit"]').attr('disabled', 'disabled');
+						form.find('[type="submit"]').attr('disabled', '');
 					},
 					error: function(model, error){
-						form.find('["type="submit"]').attr('disabled', '');
+						form.find('[type="submit"]').attr('disabled', '');
 					}
 				});
 				return false;
