@@ -50,7 +50,7 @@
 				var data = form.serializeObject();
 				new stash.models.User().save(data, {
 					success: function(model, result){
-						I.logMeIn(result)
+						I.logMeIn(result.user)
 						.done(function(result){
 							stash.helpers.navigate('/stash');
 						});

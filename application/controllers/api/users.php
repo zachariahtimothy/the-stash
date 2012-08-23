@@ -95,7 +95,7 @@ class Users extends CI_Controller {
 	 	$this->_user = null;
 	 	$data['json'] = json_encode(array(
 			'status' => 'success',
-			'sesstion' => $this->session->userdata('theStashUser')
+			'session' => $this->session->userdata('theStashUser')
 		));
 	 	$this->load->view('json_view', $data);		
 	}
