@@ -28,22 +28,18 @@
 					 //stash.identity.trigger('identityChange identityChange:login');
 				});
 
-				if (args.user && args.user.id){
-					defer.resolve(args);
-				} else {
 				//TODO: Uncomment when login is ready
-					 $.ajax({
-						url: stash.settings.apiUrl + 'users/login',
-						type: 'POST',
-						data: args,
-						success:function(result){
-							defer.resolve(result);
-						},
-						error: function(error){
-							defer.reject(error);
-						}
-					});
-				}
+				 $.ajax({
+					url: stash.settings.apiUrl + 'users/login',
+					type: 'POST',
+					data: args,
+					success:function(result){
+						defer.resolve(result);
+					},
+					error: function(error){
+						defer.reject(error);
+					}
+				});
 				return defer.promise();
 			},
 			setLoggedInUser: function(userModel){
