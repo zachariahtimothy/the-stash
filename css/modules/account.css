@@ -31,10 +31,10 @@
 }
 #account .account-section.active h3 a[href]{
 	background-image: -webkit-linear-gradient(top,#ebebeb 0%, #f2f2f2 100%);
-	background-image: -o-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
-	background-image: -moz-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
-	background-image: -ms-linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
-	background-image: linear-gradient(top,#45bf55 0%, #349141 48%, #167f39 52%, #044c29 100%);
+	background-image: -o-linear-gradient(top,#ebebeb 0%, #f2f2f2 100%);
+	background-image: -moz-linear-gradient(top,#ebebeb 0%, #f2f2f2 100%);
+	background-image: -ms-linear-gradient(top,#ebebeb 0%, #f2f2f2 100%);
+	background-image: linear-gradient(top,#ebebeb 0%, #f2f2f2 100%);
 }
 #account .account-section h3 a[href]:hover{
 	text-decoration: none;
